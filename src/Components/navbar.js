@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom'
 function Navbar() {
   return (
     <div>
@@ -9,23 +9,26 @@ function Navbar() {
             <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
               <div class="position-sticky">
                 <div class="list-group list-group-flush mx-3 mt-4">
-                  <a href=" " class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                  <Link to=" " class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
                     <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Main dashboard</span>
-                  </a>
-                  <a href="/" class="list-group-item list-group-item-action py-2 ripple active">
-                    <i class="fas fa-chart-area fa-fw me-3"></i><span>Inbox</span>
-                  </a>
-                  <a href="/login" class="list-group-item list-group-item-action py-2 ripple" onClick={""}><i
-                      class="fas fa-lock fa-fw me-3"></i><span>Sent</span></a>
-                  <a href=" " class="list-group-item list-group-item-action py-2 ripple"><i
-                      class="fas fa-chart-line fa-fw me-3"></i><span>Drafts</span></a>
-                  <a href=" " class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fas fa-chart-pie fa-fw me-3"></i><span>Starred</span>
-                  </a>
-                  <a href=" " class="list-group-item list-group-item-action py-2 ripple"><i
-                      class="fas fa-chart-bar fa-fw me-3"></i><span>Deleted</span></a>
-                  <a href=" " class="list-group-item list-group-item-action py-2 ripple"><i
-                      class="fas fa-globe fa-fw me-3"></i><span>Others</span></a>
+                  </Link>
+                  <Link to="/" class="list-group-item list-group-item-action py-2 ripple active">
+                    <i class="fas fa-chart-area fa-fw me-3" to="/"></i><span>Inbox</span>
+                  </Link>
+                  <Link to="/login" class="list-group-item list-group-item-action py-2 ripple" onClick={""}>
+                  <i class="fas fa-chart-area fa-fw me-3" to="/login"></i><span>Sent</span>
+                    </Link>
+                  <Link to="/login" class="list-group-item list-group-item-action py-2 ripple">
+                  <i class="fas fa-chart-area fa-fw me-3" to="/"></i><span>Starred</span></Link>
+                  <Link to=" " class="list-group-item list-group-item-action py-2 ripple">
+                  <i class="fas fa-chart-area fa-fw me-3" to="/login"></i><span>Trash</span>
+                  </Link>
+                  <Link to=" " class="list-group-item list-group-item-action py-2 ripple">
+                  <i class="fas fa-chart-area fa-fw me-3" to="/"></i><span>Drafts</span>
+                    </Link>
+                  <Link to=" " class="list-group-item list-group-item-action py-2 ripple">
+                  <i class="fas fa-chart-area fa-fw me-3" to="/Home"></i><span>Others</span>
+                      </Link>
                   
                 </div>
               </div>
@@ -43,10 +46,10 @@ function Navbar() {
                 </button>
 
                  
-                <a class="navbar-brand" href=" ">
+                <Link class="navbar-brand" to=" ">
                   <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.bp" height="25" alt="Logo"
                     loading="lazy" />
-                </a>
+                </Link>
                  
 
               </div>
