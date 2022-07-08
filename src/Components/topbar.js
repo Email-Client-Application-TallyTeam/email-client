@@ -2,8 +2,8 @@ import React from 'react'
 
 function topbar() {
   return (
-<nav class="navbar navbar-expand-lg navbar-light bg-light row m-1">
-  <a class="navbar-brand col-6" href="#">TallyMail</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light row m-1 fixed-top" id="topbox">
+  <a class="navbar-brand col-6" href="#">TMail</a>
   <div class="collapse navbar-collapse col-6" id="navbarNav">
     <ul class="navbar-nav row">
       <li class=" nav-item active col-sm">
