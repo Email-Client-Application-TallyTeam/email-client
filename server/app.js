@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-const nodemailer = require('nodemailer');
+//const nodemailer = require('nodemailer');
 const {google}= require('googleapis');
 const CLIENT_ID ="663864417756-dps5ba9h24jfg1mltse71rb152o5rnpr.apps.googleusercontent.com";
 const CLIENT_SECRET="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";

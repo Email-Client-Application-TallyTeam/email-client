@@ -14,12 +14,25 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "^1.1.4"
+    "react-scripts": "^1.1.4",
+    "react-svg-font-icons": "^0.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "description": "This is an email client application developed using ReactJS",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Email-Client-Application-TallyTeam/email-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Email-Client-Application-TallyTeam/email-client/issues"
+  },
+  "homepage": "https://github.com/Email-Client-Application-TallyTeam/email-client#readme"
 }
