@@ -14,7 +14,7 @@ function Navbar() {
               <Link to="/compose" className=" py-4 ripple btn-lg" aria-current="true">
                   <button type="button" className="btn btn-outline-dark my-4 mx-2"> <FontAwesomeIcon icon={faPlus} /> Compose Mail</button>
                   </Link>
-                <div className="list-group list-group-flush mx-3 mt-4">
+                <div className="list-group list-group-flush  mt-4">
 
                   <Link to="/" className="list-group-item list-group-item-action py-2 ">
                   <FontAwesomeIcon icon={faInbox} />
@@ -27,7 +27,7 @@ function Navbar() {
                     </Link>
                   <Link to="/starred" className="list-group-item list-group-item-action py-2 ripple">
                   <FontAwesomeIcon icon={faStar} />
-                  <i className=" me-3" ></i><span>Starred</span></Link>
+                  <i className=" me-3" ></i><span>Star</span></Link>
                   <Link to="/trash " className="list-group-item list-group-item-action py-2 ripple">
                   <FontAwesomeIcon icon={faTrash} />
                   <i className="me-3" ></i><span>Trash</span>

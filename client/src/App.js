@@ -12,10 +12,13 @@ import Compose from './Components/compose'
 import './App.css';
 import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import { ViewMail } from './Components/viewMail';
 
 const Routing = () =>{
   return(
     <Routes>
+      
+       
       <Route path="/" element={<Inbox />} />
       <Route path="/login" element={<Login />} />
       <Route path="/sent" element={<Sent />} />
@@ -23,6 +26,7 @@ const Routing = () =>{
       <Route path="/drafts" element={<Draft />} />
       <Route path="/trash" element={<Trash />} />
       <Route path="/compose" element={<Compose/>}/>
+      <Route path="/view" element={<ViewMail/>}/>
     </Routes>
   )
 }
