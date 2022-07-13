@@ -6,7 +6,6 @@ import { faStar, faInbox, faArrowAltCircleRight, faTrash, faPager, faPlus } from
 function Navbar() {
   return (
     <div>
-    
           <header>
             
             <nav id="sidebarMenu" className=" d-lg-block sidebar collapse.show bg-white">
@@ -39,24 +38,12 @@ function Navbar() {
                   <Link to=" " className="list-group-item list-group-item-action py-2 ripple">
                   <i className=" me-3" ></i><span>Others</span>
                       </Link>
-                  
                 </div>
               </div>
-            </nav>
-            
-
-            
-           
-            
+            </nav> 
           </header>
           
-
-          
-          <main >
-            <div className="container pt-4"></div>
-          </main>
-          
-          </div>
+      </div>
   )
 }
 

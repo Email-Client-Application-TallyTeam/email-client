@@ -6,8 +6,7 @@
   text-align: center;
 }
 
-
-/* .App-logo {
+.App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
@@ -46,7 +45,108 @@ body {
     padding-left: 240px;
   }
 }
+/* Login */
+.loginBox{
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+  align-items: center;
+  height:100vh;
+}
+.loginCont{
+  width:30vw;
+  height:30vh;
+  display:flex;
+  flex-direction:column;
+  background: #FFFFFF;
+  border-radius:10px;
+  box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.104195);
+}
+.loginHeader{
+  background-color: #474D56;
+  height: 50px;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.loginHeader>p{
+  color:#FFFFFF;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  margin:0px;
+  padding:0px;
+}
+.loginBody{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin:10px;
+}
+.loginBodyPara1{
+  font-size:24px;
+  text-align: center;
+  margin-top:20px;
+}
+.wave {
+  margin-left:10px;
 
+  animation-name: wave-animation;  
+  animation-duration: 2.5s;       
+  animation-iteration-count: infinite;
+  transform-origin: 70% 70%;    
+  display: inline-block;
+}
+
+@keyframes wave-animation {
+    0% { transform: rotate( 0.0deg) }
+   10% { transform: rotate(14.0deg) } 
+   20% { transform: rotate(-8.0deg) }
+   30% { transform: rotate(14.0deg) }
+   40% { transform: rotate(-4.0deg) }
+   50% { transform: rotate(10.0deg) }
+   60% { transform: rotate( 0.0deg) }
+  100% { transform: rotate( 0.0deg) }
+}
+.googleAuth{
+  margin: 20px 10px;
+}
+.oAuthBtn{
+  width:100%;
+  background: #D53D2F;
+  border-radius: 6px;   
+  border:none;
+  height:50px;
+  font-size:20px;
+  color:#ffffff;
+}
+
+/* Topbar */
+.topbar{
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  width:100%;
+  z-index: 10;
+}
+.navbar-brand{
+  width:30px;
+}
+.rightBar{
+  display:flex;
+  flex-direction:row;
+  width: 500px;
+  justify-content: space-around;
+}
+.navbar-brand{
+  margin-left:20px;
+}
+.logoutBtn{
+  margin-right:10px;
+}
 /* Sidebar */
 .sidebar {
   position: fixed;
@@ -85,10 +185,6 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   /* Scrollable contents if viewport is shorter than content. */
-}
-
-#topbox {
-  z-index: 10;
 }
 
 #sidebarMenu {
