@@ -50,7 +50,7 @@ const inbox = () => {
 
       <div style={{height: '155rem'}} />
 
-      {/* 👇️ scroll to top on button click */}
+      {/*  scroll to top on button click */}
       <button
         onClick={() => {
           window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
