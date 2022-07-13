@@ -13,6 +13,7 @@ import Compose from './Components/compose'
 import './App.css';
 import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import { ViewMail } from './Components/viewMail';
 import {gapi} from 'gapi-script';
 
 const clientid="31675053631-ji1okm2bm45ppkqkm5f4rs2ju0nj18ji.apps.googleusercontent.com";
@@ -36,6 +37,7 @@ const Routing = () =>{
       <Route path="/drafts" element={<Draft />} />
       <Route path="/trash" element={<Trash />} />
       <Route path="/compose" element={<Compose/>}/>
+      <Route path="/view" element={<ViewMail/>}/>
     </Routes>
   )
 }
