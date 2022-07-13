@@ -24,27 +24,25 @@ function Compose() {
   }
   return (
     <div className="compose-box">
-      
       <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">From:</label>
-  <input type="email" class="form-control"  name='from' value={mail.from || ''} onChange={(e)=>handleInput(e)} placeholder=" "/>
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">To:</label>
-  <input type="email" class="form-control"  name='to' value={mail.to || ''} onChange={(e)=>handleInput(e)} placeholder=" "/>
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Subject:</label>
-  <input type="text" class="form-control" id="exampleFormControlInput1"  name='subject' value={mail.subject || ''} onChange={(e)=>handleInput(e)} placeholder=" "/>
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Message:</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" name='message' value={mail.message || ''} onChange={(e)=>handleInput(e)} rows="9"></textarea>
-</div>
-<button type="submit" class=" send btn btn-primary mb-3" onClick={sendMail}>Send</button>
-<input type="file" name='file' value={mail.file} onChange={handleInput} id="inputGroupFile01"></input>
-<button type="submit" class=" draft btn btn-primary mb-3 ">Save as draft</button>
-
+        <label for="exampleFormControlInput1" class="form-label">From:</label>
+        <input type="email" class="form-control"  name='from' value={mail.from || ''} onChange={(e)=>handleInput(e)} placeholder=" "/>
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">To:</label>
+        <input type="email" class="form-control"  name='to' value={mail.to || ''} onChange={(e)=>handleInput(e)} placeholder=" "/>
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Subject:</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1"  name='subject' value={mail.subject || ''} onChange={(e)=>handleInput(e)} placeholder=" "/>
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Message:</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" name='message' value={mail.message || ''} onChange={(e)=>handleInput(e)} rows="9"></textarea>
+      </div>
+      <button type="submit" class=" send btn btn-primary mb-3" onClick={sendMail}>Send</button>
+      <input type="file" name='file' value={mail.file} onChange={handleInput} id="inputGroupFile01"></input>
+      <button type="submit" class=" draft btn btn-primary mb-3 ">Save as draft</button>
     </div>
   )
 }
