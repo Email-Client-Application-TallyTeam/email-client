@@ -1,28 +1,38 @@
 import React,{useState} from 'react';
 import axios from 'axios';
-
+import Navbar from '../Components/navbar';
 function Compose() {
   const [mail,setMail] = useState(
     {
-      to:"",subject:"", message:"",file:""
+      to:"",subject:"", message:"",file:"",accessToken:""
     }
   )
   let name,value;
   const handleInput=(e)=>{
     name= e.target.name;
     value= e.target.value;
+    mail.accessToken= localStorage.getItem('accessToken')
     setMail({...mail,[name]:value})
     
    // console.log({[name]:value});
   }
   const sendMail= async (e)=>{
+    if(mail.to=="" || mail.message==""){
+      window.alert("Empty credentials! Please fill the details.");
+      return;
+    }
+    window.alert("Mail sent successfully");
+    console.log(localStorage.getItem('userData[profileObj[email]]'));
     const data=await axios.post("/send",mail)
    
      setMail({["to"]:"",["subject"]:"",["message"]:"",["file"]:""});
      console.log(mail);
+   
       //axios.post()
   }
   return (
+    <div>
+      <Navbar/>
     <div className="compose-box">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">From:</label>
@@ -43,6 +53,7 @@ function Compose() {
       <button type="submit" class=" send btn btn-primary mb-3" onClick={sendMail}>Send</button>
       <input type="file" name='file' value={mail.file} onChange={handleInput} id="inputGroupFile01"></input>
       <button type="submit" class=" draft btn btn-primary mb-3 ">Save as draft</button>
+    </div>
     </div>
   )
 }

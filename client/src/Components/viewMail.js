@@ -1,8 +1,12 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faInbox, faArrowAltCircleRight, faTrash, faPager, faPlus } from '@fortawesome/free-solid-svg-icons';
+import Navbar from '../Components/navbar';
 export const ViewMail = () => {
   return (
+    <div>
+      <Navbar/>
+    
     <div className="view-box">
       
     <div class="mb-3">
@@ -35,6 +39,7 @@ along with more commonly used minutes to hours, seconds to minutes, or seconds t
 </div>
 
 
+  </div>
   </div>
   )
 }

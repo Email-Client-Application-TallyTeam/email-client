@@ -3,11 +3,13 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SvgFontIcons from 'react-svg-font-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-
+import Navbar from '../Components/navbar';
 const draft = () => {
     const [DraftList, setDraftList] = useState([{date:'22may',sendTo:'kevin@dmail.com'},{date:'23may',sendTo:'john@dmail.com'},{date:'24may',sendTo:'roy@yahoo.com'},{date:'25may',sendTo:'will@yahoo.com'},{date:'22may',sendTo:'kevin@dmail.com'},{date:'23may',sendTo:'john@dmail.com'},{date:'24may',sendTo:'roy@yahoo.com'},{date:'25may',sendTo:'will@yahoo.com'},{date:'22may',sendTo:'kevin@dmail.com'},{date:'23may',sendTo:'john@dmail.com'},{date:'24may',sendTo:'roy@yahoo.com'},{date:'25may',sendTo:'will@yahoo.com'},{date:'22may',sendTo:'kevin@dmail.com'},{date:'23may',sendTo:'john@dmail.com'},{date:'24may',sendTo:'roy@yahoo.com'},{date:'25may',sendTo:'will@yahoo.com'},{date:'22may',sendTo:'kevin@dmail.com'},{date:'23may',sendTo:'john@dmail.com'},{date:'24may',sendTo:'roy@yahoo.com'},{date:'25may',sendTo:'will@yahoo.com'},{date:'22may',sendTo:'kevin@dmail.com'},{date:'23may',sendTo:'john@dmail.com'},{date:'24may',sendTo:'roy@yahoo.com'},{date:'25may',sendTo:'will@yahoo.com'}]);
 
     return (
+        <div>
+            <Navbar/>
         <div  id="draftListBox">
             <div class="mb-2">
                 <nav class="navbar-xl navbar-light bg-light">
@@ -34,6 +36,7 @@ const draft = () => {
                     </li>;
                 })}
             </ul>
+        </div>
         </div>
     )
 }
