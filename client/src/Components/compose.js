@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import axios from 'axios';
+import Navbar from "./navbar";
 
 function Compose() {
   const [mail,setMail] = useState(
@@ -23,6 +24,8 @@ function Compose() {
       //axios.post()
   }
   return (
+   <div class="composeCont">
+    <div><Navbar /></div>
     <div className="compose-box">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">From:</label>
@@ -44,6 +47,7 @@ function Compose() {
       <input type="file" name='file' value={mail.file} onChange={handleInput} id="inputGroupFile01"></input>
       <button type="submit" class=" draft btn btn-primary mb-3 ">Save as draft</button>
     </div>
+   </div>
   )
 }
 
