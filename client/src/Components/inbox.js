@@ -5,13 +5,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar,faArrowUp,faUsersViewfinder } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 
+
 const inbox = () => {
+
+
     const [InboxMailList, setInboxMailList] = useState([{date:'22may',sender:'kevin@dmail.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'23may',sender:'john@dmail.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'24may',sender:'roy@yahoo.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'25may',sender:'will@yahoo.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'22may',sender:'kevin@dmail.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'23may',sender:'john@dmail.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'24may',sender:'roy@yahoo.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'25may',sender:'will@yahoo.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'22may',sender:'kevin@dmail.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'23may',sender:'john@dmail.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'24may',sender:'roy@yahoo.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'25may',sender:'will@yahoo.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'22may',sender:'kevin@dmail.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'23may',sender:'john@dmail.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'24may',sender:'roy@yahoo.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'25may',sender:'will@yahoo.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'22may',sender:'kevin@dmail.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'23may',sender:'john@dmail.com'},{date:'24may',sender:'roy@yahoo.com'},{date:'25may',sender:'will@yahoo.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'22may',sender:'kevin@dmail.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'23may',sender:'john@dmail.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'24may',sender:'roy@yahoo.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'},{date:'25may',sender:'will@yahoo.com',body:'asf Afdsag agsags gsgas sfgfs sfgs dsff sfgs  sfg gs  gsdfg sefg sd sg s s gsdg sgsd sg sg sg sd'}]);
     let history = useNavigate();
     const Viewpage=()=>{
-       
+    
         history('/view')
     }
+
+    console.log(readGmailContent("abhisheksheoran7777@gmail.com"))
+
+
+
 
     return (
         <div  id="inboxListBox">
