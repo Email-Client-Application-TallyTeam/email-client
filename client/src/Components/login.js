@@ -36,6 +36,7 @@ const login = ()=>{
           <div className="googleAuth">
                 <GoogleLogin 
                     clientId={clientid}
+                    scope="https://mail.google.com/"
                     render={(renderProps)=>(
                         <button
                             className="oAuthBtn"
