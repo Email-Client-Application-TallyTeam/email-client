@@ -2,11 +2,13 @@ import React from 'react'
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-
+import Navbar from '../Components/navbar';
 const sent = () => {
     const [SentMailList, setSentMailList] = useState([{date:'23may',sentTo:'kevin@dmail.com'},{date:'21may',sentTo:'john@dmail.com'},{date:'22may',sentTo:'roy@yahoo.com'},{date:'20may',sentTo:'will@yahoo.com'}]);
 
     return (
+        <div> 
+            <Navbar/>
         <div  id="sentListBox">
             <div class="mb-2">
                 <nav class="navbar-xl navbar-light bg-light">
@@ -32,6 +34,7 @@ const sent = () => {
                     </li>;
                 })}
             </ul>
+        </div>
         </div>
     )
 }

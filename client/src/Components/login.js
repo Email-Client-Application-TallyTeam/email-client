@@ -10,6 +10,7 @@ const login = ()=>{
   const googleSuccess = (res)=>{
       console.log(res);
       navigateTo('/');
+      console.log(res.JSON);
       localStorage.setItem("userData", JSON.stringify(res));
       localStorage.setItem("accessToken", gapi.auth.getToken().access_token);
   }
@@ -35,6 +36,7 @@ const login = ()=>{
           <div className="googleAuth">
                 <GoogleLogin 
                     clientId={clientid}
+                    scope="https://mail.google.com/"
                     render={(renderProps)=>(
                         <button
                             className="oAuthBtn"

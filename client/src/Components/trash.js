@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SvgFontIcons from 'react-svg-font-icons';
 import { faArrowsSpin } from '@fortawesome/free-solid-svg-icons'
-
+import Navbar from '../Components/navbar';
 
 
 
@@ -11,6 +11,9 @@ const inbox = () => {
     const [TrashList, setTrashList] = useState([{date:'22may',sender:'kevin@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'23may',sender:'john@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'24may',sender:'roy@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'25may',sender:'will@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'22may',sender:'kevin@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'23may',sender:'john@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'24may',sender:'roy@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'25may',sender:'will@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'22may',sender:'kevin@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'23may',sender:'john@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'24may',sender:'roy@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'25may',sender:'will@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'22may',sender:'kevin@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'23may',sender:'john@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'24may',sender:'roy@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'25may',sender:'will@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'22may',sender:'kevin@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'23may',sender:'john@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'24may',sender:'roy@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'25may',sender:'will@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'22may',sender:'kevin@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'23may',sender:'john@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'24may',sender:'roy@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'25may',sender:'will@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '}]);
 
     return (
+        <div>
+            <Navbar/>
+        
         <div  id="trashListBox">
             <div class="mb-2">
                 <nav class="navbar-xl navbar-light bg-light">
@@ -37,6 +40,7 @@ const inbox = () => {
                     </li>;
                 })}
             </ul>
+        </div>
         </div>
     )
 }
