@@ -27,8 +27,9 @@ const sent = () => {
                                 <h5>{mail.sentTo} </h5>
                                 <div class="text-warning">{mail.date}</div>
                             </div>
-                            <div class="row">{mail.body}</div> 
-                        </div>
+                            <button class="btn btn-outline-success btn-sm col"><FontAwesomeIcon icon={faStar} />Star Mail</button>
+                        </div>    
+                        <div class="row">{mail.body}</div> 
                     </div>
                         </li>;
                     })}

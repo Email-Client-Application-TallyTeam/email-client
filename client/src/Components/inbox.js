@@ -19,8 +19,7 @@ const inbox = () => {
        
        <div className="inboxCont">
        <Navbar/>
-      
-       
+    
         <div  id="inboxListBox">
             <div class="mb-2">
                 <nav class="navbar-xl navbar-light bg-light">
@@ -41,7 +40,11 @@ const inbox = () => {
                                    
                                     <div class="text-warning">{mail.date} </div>
                                 </div>
-                                
+                                <div class="col"></div>
+                                <div class="col"></div>
+                                <button  class="btn  btn-sm col-1 buttom-customise" onClick={Viewpage} ><FontAwesomeIcon icon={faUsersViewfinder} /></button> 
+                                <button class="btn  btn-sm col-1  buttom-customise"><FontAwesomeIcon icon={faStar} /></button>
+                                <button class="btn  btn-sm col-1 buttom-customise"><FontAwesomeIcon icon={faArrowUp} /></button> 
                             </div>
                         </div>
                         </li>;
