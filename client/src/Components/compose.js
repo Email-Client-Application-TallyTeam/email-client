@@ -4,12 +4,12 @@ import Navbar from '../Components/navbar';
 function Compose() {
   const [mail,setMail] = useState(
     {
-      from:"",to:"",subject:"", message:"",file:"",accessToken:""
+      from:"",to:"",subject:"", message:"",image:"",accessToken:""
     }
   )
   const x= localStorage.getItem('userData');
   const a = JSON.parse(x);
-  console.log(a.wt.Ad);
+  //console.log(a.wt.Ad);
   
   let name,value;
   const handleInput=(e)=>{
@@ -29,14 +29,16 @@ function Compose() {
     
    
     const data=await axios.post("/send",mail)
-   
+   console.log(data.status);
   if(data.status==200){
     window.alert("Mail sent successfully");
+    const f= document.getElementById("inputGroupFile01").files[0]; 
+    console.log(f);
    }
    else{
-    window.alert("Mail was not sent. Please try again later");
+    window.alert("Oops! Mail was not sent. Please try again later");
    }
-     setMail({["to"]:"",["subject"]:"",["message"]:"",["file"]:""});
+     setMail({["to"]:"",["subject"]:"",["message"]:"",["image"]:""});
      console.log(data);
    
       //axios.post()
@@ -62,7 +64,7 @@ function Compose() {
         <textarea class="form-control" id="exampleFormControlTextarea1" name='message' value={mail.message || ''} onChange={(e)=>handleInput(e)} rows="9"></textarea>
       </div>
       <button type="submit" class=" send btn btn-primary mb-3" onClick={sendMail}>Send</button>
-      <input type="file" name='file' value={mail.file} onChange={handleInput} id="inputGroupFile01"></input>
+      <input type="file"  name='image' value={mail.image} onChange={handleInput} id="inputGroupFile01"  enctype="multipart/form-data"></input>
       <button type="submit" class=" draft btn btn-primary mb-3 ">Save as draft</button>
     </div>
     </div>
