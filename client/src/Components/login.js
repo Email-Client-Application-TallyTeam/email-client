@@ -10,7 +10,6 @@ const login = ()=>{
   const googleSuccess = (res)=>{
       console.log(res);
       navigateTo('/');
-      console.log(res.JSON);
       localStorage.setItem("userData", JSON.stringify(res));
       localStorage.setItem("accessToken", gapi.auth.getToken().access_token);
   }

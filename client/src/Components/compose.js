@@ -28,7 +28,7 @@ function Compose() {
     }
     
    
-    const data=await axios.post("/send",mail)
+  const data=await axios.post("/send",mail)
    console.log(data.status);
   if(data.status==200){
     window.alert("Mail sent successfully");

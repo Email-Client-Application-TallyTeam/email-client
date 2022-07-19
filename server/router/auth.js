@@ -12,14 +12,11 @@ const REDIRECT_URI="https://www.youtube.com/watch?v=iUNkYi2ggvc";  /*isn't makin
 const axios = require("axios");
 const qs = require("qs");
 
+let accessToken="";
 
-// router.get('/',(req,res) => {
-//   res.sendFile(__dirname + '/index.html')
-// })
-router.post("/send", async (req, res) => {
-    
+
+router.post("/send", async (req, res) => {  
  //.log(req.body.accessToken);
- 
   async function sendMail (){
     
         // console.log(req.files.image);
@@ -31,7 +28,7 @@ router.post("/send", async (req, res) => {
           console.log(req.files)
 
           try{
-            
+        
             let transporter = nodemailer.createTransport({
               host: "smtp.gmail.com",
               port: 465,
@@ -92,41 +89,6 @@ router.post("/send", async (req, res) => {
 })
 
 // RECIEVING MAILS
-getAcceToken = async () => {
-  var data = qs.stringify({
-    client_id:
-      "31675053631-ji1okm2bm45ppkqkm5f4rs2ju0nj18ji.apps.googleusercontent.com",
-    client_secret: "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",
-    refresh_token:
-      "1//0gj3wvcem0u7PCgYIARAAGBASNwF-L9IreKjJ4Luh29vp0mrDe1-p90f9LBgx6pS30chD7gtiPjbQFpNNd1iWuO8pPkHGQJ7WZAM",
-    grant_type: "refresh_token",
-  });
-  var config = {
-    method: "post",
-    url: "https://accounts.google.com/o/oauth2/token",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    data: data,
-  };
-
-  let accessToken = "";
-
-  await axios(config)
-    .then(async function (response) {
-      accessToken = await response.data.access_token;
-
-      //console.log("Access Token " + accessToken);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  return accessToken;
-};
-
-const accessToken =getAcceToken(); 
-
 readGmailContent = async (messageId) => {
   var config = {
     method: "get",
@@ -175,30 +137,38 @@ readGmailMessages = async () => {
 };
 
 
+router.post("/getSnippet", async (req,res)=>{
+  accessToken=req.body.currentAccess;
 
-
-
-
-router.post("/mails", async (req,res)=>{
+  const snippetsArray=[];
+  const messageArray=[];
   const threadIdListObject = await readGmailMessages();
-  //console.log(threadIdListObject);
-  let count =1;
+  //console.log(threadIdListObject, "Threads");
+
   threadIdListObject.messages.forEach(async (msg)=>{
-    //console.log(msg.threadId);
-    const message = await readGmailContent(msg.threadId);
-    const snippets=message.snippet;
-    //this.inboxList.push(snippets);
-    console.log(snippets);
+      const message = await readGmailContent(msg.threadId);
+      //console.log(JSON.stringify(message));
 
-    // const encodedMessage = await message.payload.body.data;
-    // console.log(encodedMessage);
-
-    //const decodedStr = Buffer.from(encodedMessage, "base64").toString("ascii");
-
-    //console.log(decodedStr);
-
-        
-      })
-    })
+      //Populating snippet array
+      snippetsArray.push({
+        messageId:message.id,
+        snippet:message.snippet,
+        messageFrom:message.payload.headers.filter((data)=>data.name==="From"?data.value:null),
+        messageTo:message.payload.headers.filter((data)=>data.name==="To"?data.value:null),
+        messageDate:message.payload.headers.filter((data)=>data.name==="Date"?data.value:null),
+        messageSubject:message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null)
+      });
+     
+      if(snippetsArray.length == 99){
+        console.log("passed");
+        res.json(snippetsArray);
+      }
+      //Populating message array
+      //const body=message.payload.body;
+      //const arg=JSON.stringify(body.data);
+      //const decodedStr = Buffer.from(arg, "base64").toString("utf8");
+      //console.log(decodedStr);
+  })
+})
     
-      module.exports= router
+module.exports= router;
