@@ -1,11 +1,9 @@
 .html{
   font-size: 62.5%;
-  
 }
 .App {
   text-align: center;
 }
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -147,6 +145,12 @@ body {
 .logoutBtn{
   margin-right:10px;
 }
+.logout{
+  background-color: rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))!important;
+  color:#ffffff !important;
+  border:1px solid #ffffff !important;
+  
+}
 /* Sidebar */
 .sidebar {
   position: fixed;
@@ -270,4 +274,12 @@ body {
   background-color: #fbfbfb;
   border: none;
   margin-left: 1rem;
+}
+
+.composeCont, .draftCont, .inboxCont, .sentCont, .trashCont, .starCont, .viewCont{
+  display:flex;
+  flex-direction: row;
+}
+.draftCont, .inboxCont, .sentCont, .trashCont, .staredCont{
+  padding:20px;
 }

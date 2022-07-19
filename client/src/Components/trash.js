@@ -11,7 +11,7 @@ const inbox = () => {
     const [TrashList, setTrashList] = useState([{date:'22may',sender:'kevin@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'23may',sender:'john@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'24may',sender:'roy@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'25may',sender:'will@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'22may',sender:'kevin@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'23may',sender:'john@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'24may',sender:'roy@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'25may',sender:'will@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'22may',sender:'kevin@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'23may',sender:'john@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'24may',sender:'roy@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'25may',sender:'will@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'22may',sender:'kevin@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'23may',sender:'john@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'24may',sender:'roy@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'25may',sender:'will@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'22may',sender:'kevin@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'23may',sender:'john@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'24may',sender:'roy@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'25may',sender:'will@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'22may',sender:'kevin@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'23may',sender:'john@dmail.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'24may',sender:'roy@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '},{date:'25may',sender:'will@yahoo.com',body:'hello xyz,asdfagcas afa asfa aas adf asdf asdf '}]);
 
     return (
-        <div>
+        <div className='trashCont'>
             <Navbar/>
         
         <div  id="trashListBox">
@@ -24,7 +24,8 @@ const inbox = () => {
             </div>
             <div class="p-2 bg-warning" ></div>
             <ul class="list-group">
-                {TrashList.map((mail, index)=>{
+                {
+                TrashList.map((mail, index)=>{
                     return <li class="list-group-item" key= { index }>
                             <div>
                                 <div class="row">
@@ -34,13 +35,16 @@ const inbox = () => {
                                     </div>
                                     <button type="button" class="btn btn-sm col btn-outline-danger"><SvgFontIcons class="col" sets="fontAwesome" name="trash" fill="#333" />Delete Permanently</button>
                                     <button class="btn btn-outline-success btn-sm col"><FontAwesomeIcon icon={faArrowsSpin} />Recover Mail</button>
-                                </div>
+                                </div>  
                                 <div class="row">{mail.body}</div> 
-                            </div>
-                    </li>;
-                })}
+                               
+                            </div> 
+                        </li>;
+                        }
+                    )
+                }
             </ul>
-        </div>
+            </div>
         </div>
     )
 }

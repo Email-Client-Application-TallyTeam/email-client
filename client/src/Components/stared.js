@@ -7,7 +7,7 @@ const stared = () => {
     const [StaredMailList, setStaredMailList] = useState([{date:'22may',sender:'kevin@dmail.com'},{date:'23may',sender:'john@dmail.com'},{date:'24may',sender:'roy@yahoo.com'},{date:'25may',sender:'will@yahoo.com'},{date:'22may',sender:'kevin@dmail.com'},{date:'23may',sender:'john@dmail.com'},{date:'24may',sender:'roy@yahoo.com'},{date:'25may',sender:'will@yahoo.com'},{date:'22may',sender:'kevin@dmail.com'},{date:'23may',sender:'john@dmail.com'},{date:'24may',sender:'roy@yahoo.com'},{date:'25may',sender:'will@yahoo.com'},{date:'22may',sender:'kevin@dmail.com'},{date:'23may',sender:'john@dmail.com'},{date:'24may',sender:'roy@yahoo.com'},{date:'25may',sender:'will@yahoo.com'},{date:'22may',sender:'kevin@dmail.com'},{date:'23may',sender:'john@dmail.com'},{date:'24may',sender:'roy@yahoo.com'},{date:'25may',sender:'will@yahoo.com'},{date:'22may',sender:'kevin@dmail.com'},{date:'23may',sender:'john@dmail.com'},{date:'24may',sender:'roy@yahoo.com'},{date:'25may',sender:'will@yahoo.com'}]);
 
     return (
-        <div>
+        <div className="staredCont">
             <Navbar/>
         <div  id="staredListBox">
             <div class="mb-2">
@@ -31,9 +31,9 @@ const stared = () => {
                             </div>
                             <div class="row">{mail.body}</div> 
                         </div>
-                    </li>;
-                })}
-            </ul>
+                        </li>;
+                    })}
+                </ul>
         </div>
         </div>
     )

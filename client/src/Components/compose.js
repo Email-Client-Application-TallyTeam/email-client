@@ -44,7 +44,7 @@ function Compose() {
       //axios.post()
   }
   return (
-    <div>
+    <div className="composeCont">
       <Navbar/>
     <div className="compose-box">
       <div class="mb-3">

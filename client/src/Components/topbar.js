@@ -40,6 +40,7 @@ function topbar() {
                   {
                      window.location.pathname==="/login"?null:
                      <GoogleLogout 
+                      className='logout'
                       clientId={clientid}
                       buttonText={"Logout"}
                       onLogoutSuccess={onSuccess}
