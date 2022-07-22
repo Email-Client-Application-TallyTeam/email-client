@@ -1,11 +1,24 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { useState } from 'react';
 import Navbar from "./navbar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SvgFontIcons from 'react-svg-font-icons';
-import { faArrowRight, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight,faTrash } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+
+
 const draft = () => {
-    const [DraftList, setDraftList] = useState([{date:'22may',sendTo:'kevin@dmail.com'},{date:'23may',sendTo:'john@dmail.com'},{date:'24may',sendTo:'roy@yahoo.com'},{date:'25may',sendTo:'will@yahoo.com'},{date:'22may',sendTo:'kevin@dmail.com'},{date:'23may',sendTo:'john@dmail.com'},{date:'24may',sendTo:'roy@yahoo.com'},{date:'25may',sendTo:'will@yahoo.com'},{date:'22may',sendTo:'kevin@dmail.com'},{date:'23may',sendTo:'john@dmail.com'},{date:'24may',sendTo:'roy@yahoo.com'},{date:'25may',sendTo:'will@yahoo.com'},{date:'22may',sendTo:'kevin@dmail.com'},{date:'23may',sendTo:'john@dmail.com'},{date:'24may',sendTo:'roy@yahoo.com'},{date:'25may',sendTo:'will@yahoo.com'},{date:'22may',sendTo:'kevin@dmail.com'},{date:'23may',sendTo:'john@dmail.com'},{date:'24may',sendTo:'roy@yahoo.com'},{date:'25may',sendTo:'will@yahoo.com'},{date:'22may',sendTo:'kevin@dmail.com'},{date:'23may',sendTo:'john@dmail.com'},{date:'24may',sendTo:'roy@yahoo.com'},{date:'25may',sendTo:'will@yahoo.com'}]);
+    const [DraftList, setDraftList] = useState([]);
+
+    useEffect(()=>{
+        async function fetchDraft() {
+            const currentAccess=localStorage.getItem('accessToken')
+            const data= await axios.post("/getDraft",{currentAccess});
+            console.log(data.data);
+            setDraftList(data.data);
+          }
+        fetchDraft();
+    },0)
 
     return (
         <div className='draftCont'>
@@ -25,13 +38,13 @@ const draft = () => {
                         <div>
                             <div class="row">
                                 <div class="col">
-                                    <h5>{mail.sendTo} </h5>
-                                    <div class="text-warning">{mail.date}</div>
+                                    <h5>{mail.Msnippet} </h5>
+
                                 </div>
                                 <button class="btn  btn-sm col-1  buttom-customise"><FontAwesomeIcon icon={faTrash} /></button>
                                 <button class="btn  btn-sm col-1  buttom-customise"><FontAwesomeIcon icon={faArrowRight} /></button>
                             </div>
-                            <div class="row">{mail.body}</div> 
+                            <div class="row"></div> 
                         </div>
                     </li>;
                 })}
