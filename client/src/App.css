@@ -123,6 +123,13 @@ body {
 }
 
 /* Topbar */
+.userImage{
+  width:30px;
+  height:30px;
+  margin-right:10px;
+  border-radius: 20px;
+  border:1px solid #ffffff;
+}
 .topbar{
   display:flex;
   flex-direction:row;
@@ -149,7 +156,6 @@ body {
   background-color: rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))!important;
   color:#ffffff !important;
   border:1px solid #ffffff !important;
-  
 }
 /* Sidebar */
 .sidebar {

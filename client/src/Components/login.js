@@ -12,6 +12,9 @@ const login = ()=>{
       navigateTo('/');
       localStorage.setItem("userData", JSON.stringify(res));
       localStorage.setItem("accessToken", gapi.auth.getToken().access_token);
+      setTimeout(()=>{
+        window.location.reload();
+      },1000);
   }
 
   const googleFailure =(error)=>{

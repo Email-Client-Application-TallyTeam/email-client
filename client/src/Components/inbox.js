@@ -29,7 +29,6 @@ const inbox = () => {
     }
     
     return (
-       
        <div className="inboxCont">
        <Navbar/>
     
