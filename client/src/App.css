@@ -277,7 +277,14 @@ body {
   border: none;
   margin-left: 1rem;
 }
-
+.snippet{
+  font-weight: 400;
+  color: rgb(86, 72, 72);
+}
+.Inboxdate{
+  margin-left: auto;
+  float: right;
+}
 .composeCont, .draftCont, .inboxCont, .sentCont, .trashCont, .starCont, .viewCont{
   display:flex;
   flex-direction: row;

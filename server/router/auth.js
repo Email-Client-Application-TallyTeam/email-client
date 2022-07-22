@@ -143,12 +143,12 @@ router.post("/getSnippet", async (req,res)=>{
   const snippetsArray=[];
   const messageArray=[];
   const threadIdListObject = await readGmailMessages();
- console.log(threadIdListObject);
+// console.log(threadIdListObject);
 
   threadIdListObject.messages.forEach(async (msg)=>{
       const message = await readGmailContent(msg.threadId);
       //console.log(JSON.stringify(message));
-
+     
       //Populating snippet array
       snippetsArray.push({
         messageId:message.id,
@@ -160,6 +160,7 @@ router.post("/getSnippet", async (req,res)=>{
       });
      
       if(snippetsArray.length == 30){
+       
         console.log("passed");
         res.json(snippetsArray);
       }
