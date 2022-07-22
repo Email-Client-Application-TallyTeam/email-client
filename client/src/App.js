@@ -55,7 +55,6 @@ const App = () => {
   return(
     <BrowserRouter>
         <Topbar />
-        {/* {window.location.pathname=="/login"?null:<Navbar />} */}
         <Routing />
     </BrowserRouter>
   )

@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {GoogleLogout} from 'react-google-login';
 
 function topbar() {
   const clientid="31675053631-ji1okm2bm45ppkqkm5f4rs2ju0nj18ji.apps.googleusercontent.com";
   const navigateTo = useNavigate();
+
+  let user="";
+  if(localStorage.getItem("userData")){
+      const userData=localStorage.getItem("userData");
+      console.log(JSON.parse(userData));
+      user=JSON.parse(userData).profileObj;
+  }
 
   const onSuccess = ()=>{
     console.log("Logout Successfull");
@@ -27,13 +34,13 @@ function topbar() {
                   <div className="dropdown">
                   {
                     window.location.pathname==="/login"?null:
-                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">UserAccount1</button>         
+                    <div>
+                      <button className="btn btn-secondary" type="button" aria-haspopup="true" aria-expanded="false">
+                        <img src={user.imageUrl} alt="User Image" className="userImage"/>
+                        {user.name}
+                      </button> 
+                    </div>        
                   } 
-                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a className="dropdown-item" href="#">UserAccount1</a>
-                      <a className="dropdown-item" href="#">Useraccount2</a>
-                      <a className="dropdown-item" href="#">Add another account</a>
-                    </div>
                   </div>
           </div>
           <div className="logoutBtn">

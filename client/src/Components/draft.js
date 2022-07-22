@@ -3,8 +3,9 @@ import { useState } from 'react';
 import Navbar from "./navbar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SvgFontIcons from 'react-svg-font-icons';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight,faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+
 
 const draft = () => {
     const [DraftList, setDraftList] = useState([]);
@@ -40,8 +41,8 @@ const draft = () => {
                                     <h5>{mail.Msnippet} </h5>
 
                                 </div>
-                                <button type="button" class="btn btn-sm col btn-outline-danger"><SvgFontIcons class="col" sets="fontAwesome" name="trash" fill="#333" />Delete </button>
-                                <button class="btn btn-outline-success btn-sm col"><FontAwesomeIcon icon={faArrowRight} />Send</button> 
+                                <button class="btn  btn-sm col-1  buttom-customise"><FontAwesomeIcon icon={faTrash} /></button>
+                                <button class="btn  btn-sm col-1  buttom-customise"><FontAwesomeIcon icon={faArrowRight} /></button>
                             </div>
                             <div class="row"></div> 
                         </div>

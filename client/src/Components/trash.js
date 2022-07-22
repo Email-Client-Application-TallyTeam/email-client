@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SvgFontIcons from 'react-svg-font-icons';
-import { faArrowsSpin } from '@fortawesome/free-solid-svg-icons'
+import { faArrowsSpin, faRecycle, faTrashCan, faTrashRestore, faTrashRestoreAlt } from '@fortawesome/free-solid-svg-icons'
 import Navbar from '../Components/navbar';
 
 
@@ -33,8 +33,8 @@ const inbox = () => {
                                         <h5>{mail.sender} </h5>
                                         <div class="text-warning">{mail.date}</div>
                                     </div>
-                                    <button type="button" class="btn btn-sm col btn-outline-danger"><SvgFontIcons class="col" sets="fontAwesome" name="trash" fill="#333" />Delete Permanently</button>
-                                    <button class="btn btn-outline-success btn-sm col"><FontAwesomeIcon icon={faArrowsSpin} />Recover Mail</button>
+                                    <button class="btn  btn-sm col-1  buttom-customise"><FontAwesomeIcon icon={faTrashCan} /></button>
+                                    <button class="btn  btn-sm col-1  buttom-customise"><FontAwesomeIcon icon={faTrashRestore} /></button>
                                 </div>  
                                 <div class="row">{mail.body}</div> 
                                

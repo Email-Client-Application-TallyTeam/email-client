@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../Components/navbar';
 const stared = () => {
     const [StaredMailList, setStaredMailList] = useState([{date:'22may',sender:'kevin@dmail.com'},{date:'23may',sender:'john@dmail.com'},{date:'24may',sender:'roy@yahoo.com'},{date:'25may',sender:'will@yahoo.com'},{date:'22may',sender:'kevin@dmail.com'},{date:'23may',sender:'john@dmail.com'},{date:'24may',sender:'roy@yahoo.com'},{date:'25may',sender:'will@yahoo.com'},{date:'22may',sender:'kevin@dmail.com'},{date:'23may',sender:'john@dmail.com'},{date:'24may',sender:'roy@yahoo.com'},{date:'25may',sender:'will@yahoo.com'},{date:'22may',sender:'kevin@dmail.com'},{date:'23may',sender:'john@dmail.com'},{date:'24may',sender:'roy@yahoo.com'},{date:'25may',sender:'will@yahoo.com'},{date:'22may',sender:'kevin@dmail.com'},{date:'23may',sender:'john@dmail.com'},{date:'24may',sender:'roy@yahoo.com'},{date:'25may',sender:'will@yahoo.com'},{date:'22may',sender:'kevin@dmail.com'},{date:'23may',sender:'john@dmail.com'},{date:'24may',sender:'roy@yahoo.com'},{date:'25may',sender:'will@yahoo.com'}]);
@@ -27,7 +27,7 @@ const stared = () => {
                                     <h5>{mail.sender} </h5>
                                     <div class="text-warning">{mail.date}</div>
                                 </div>
-                                <button class="btn btn-outline-success btn-sm col"><FontAwesomeIcon icon={faStar} />UnStar Mail</button>
+                                <button class="btn  btn-sm col-1  buttom-customise"><FontAwesomeIcon icon={faStarHalfStroke} /></button>
                             </div>
                             <div class="row">{mail.body}</div> 
                         </div>
