@@ -230,7 +230,9 @@ body {
   border-top: 45px solid rgb(55, 53, 53);
 
 }
-
+.border_red{
+  box-shadow: 3px 2px 8px 4px rgb(227, 90, 90);
+}
 .send,
 .draft {
   margin-right: 0.5rem;

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import axios from 'axios';
 import { useState} from 'react';
 import {useNavigate} from 'react-router-dom'
+import LoadInbox from './LoadInbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar,faArrowUp,faUsersViewfinder } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
@@ -11,11 +12,12 @@ const inbox = () => {
     let history = useNavigate();
    
     const [snippetList, setSnippetList] = useState([]);
-
+    const[loading,setLoading] = useState(true);
     useEffect(()=>{
         async function fetchSnippet() {
             const currentAccess=localStorage.getItem('accessToken')
             const data= await axios.post("/getSnippet",{currentAccess});
+            setLoading(false);
             console.log(data.data);
             setSnippetList(data.data);
           }
@@ -42,6 +44,7 @@ const inbox = () => {
                 </nav>
             </div>
             <div class="p-2 bg-warning" ></div>
+            {loading?<LoadInbox/>:
             <ul class="list-group">
                 {snippetList.map((mail, index)=>{
                     
@@ -60,7 +63,7 @@ const inbox = () => {
                         </div>
                         </li>;
                     })}
-                </ul>
+                </ul>}
                 <div>
         
 
