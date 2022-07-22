@@ -172,5 +172,92 @@ router.post("/getSnippet", async (req,res)=>{
       //console.log(decodedStr);
   })
 })
+
+
+
+// RECIEVING DRAFTS
+
+readDraftContent = async (messageId) => {
+  var config = {
+    method: "get",
+    url: `https://gmail.googleapis.com/gmail/v1/users/me/drafts/${messageId}`,
+    headers: {
+      Authorization: `Bearer ${await accessToken}`,
+    },
+  };
+
+  var data = {};
+
+  await axios(config)
+    .then(async function (response) {
+      data = await response.data;
+      console.log(data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  return data;
+};
+
+readGmailDrafts = async () => {
+  var config = {
+    method: "get",
+    url: `https://gmail.googleapis.com/gmail/v1/users/me/drafts`,
+    headers: {
+      Authorization: `Bearer ${await accessToken}`,
+    },
+  };
+
+  var data = {};
+
+  await axios(config)
+    .then(async function (response) {
+      data = await response.data;
+      console.log(data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  return data;
+};
+
+router.post("/getDraft", async (req,res)=>{
+  accessToken=req.body.currentAccess;
+
+  const DraftsnippetsArray=[];
+  const draftArray=[];
+  const DraftIdListObject = await readGmailDrafts();
+  //console.log(DraftIdListObject, "Threads");
+
+  DraftIdListObject.drafts.forEach(async (msg)=>{
+      const draft = await readDraftContent(msg.id);
+      //console.log(draft.payload.message);
+      console.log(draft.message.payload.headers)
+      //Populating snippet array
+      DraftsnippetsArray.push({
+        draftId:draft.id,
+        Msnippet:draft.message.snippet,
+        draftFrom:draft.message.payload.headers.filter((data)=>data.name==="From"?data.value:null),
+        draftTo:draft.message.payload.headers.filter((data)=>data.name==="To"?data.value:null),
+        draftDate:draft.message.payload.headers.filter((data)=>data.name==="Date"?data.value:null),
+        draftSubject:draft.message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null)
+        
+      });
+     
+      if(DraftsnippetsArray.length == 3){
+        console.log("passed");
+        res.json(DraftsnippetsArray);
+      }
+      //Populating message array
+      //const body=message.payload.body;
+      //const arg=JSON.stringify(body.data);
+      //const decodedStr = Buffer.from(arg, "base64").toString("utf8");
+      //console.log(decodedStr);
+  })
+})
+
+
     
 module.exports= router;
