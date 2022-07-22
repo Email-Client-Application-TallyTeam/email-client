@@ -88,7 +88,8 @@ router.post("/send", async (req, res) => {
 
 })
 
-// RECIEVING MAILS
+// RECIEVING MAILS - Boilerplate Code
+
 readGmailContent = async (messageId) => {
   var config = {
     method: "get",
@@ -136,19 +137,19 @@ readGmailMessages = async () => {
   return data;
 };
 
-
+// RECIEVING MAILS
 router.post("/getSnippet", async (req,res)=>{
   accessToken=req.body.currentAccess;
   console.log(accessToken)
   const snippetsArray=[];
-  const messageArray=[];
   const threadIdListObject = await readGmailMessages();
+
 // console.log(threadIdListObject);
 
   threadIdListObject.messages.forEach(async (msg)=>{
       const message = await readGmailContent(msg.threadId);
       //console.log(JSON.stringify(message));
-     
+
       //Populating snippet array
       snippetsArray.push({
         messageId:message.id,
@@ -160,7 +161,7 @@ router.post("/getSnippet", async (req,res)=>{
       });
      
       if(snippetsArray.length == 30){
-       
+
         console.log("passed");
         res.json(snippetsArray);
       }
