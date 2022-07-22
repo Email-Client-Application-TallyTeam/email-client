@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
 import axios from 'axios';
+
 import { useState} from 'react';
 import {useNavigate} from 'react-router-dom'
+import LoadInbox from './LoadInbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar,faArrowUp,faUsersViewfinder } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
@@ -11,11 +13,12 @@ const inbox = () => {
     let history = useNavigate();
    
     const [snippetList, setSnippetList] = useState([]);
-
+    const[loading,setLoading] = useState(true);
     useEffect(()=>{
         async function fetchSnippet() {
             const currentAccess=localStorage.getItem('accessToken')
             const data= await axios.post("/getSnippet",{currentAccess});
+            setLoading(false);
             console.log(data.data);
             setSnippetList(data.data);
           }
@@ -40,17 +43,22 @@ const inbox = () => {
                     </form>
                 </nav>
             </div>
-            <div class="p-2 bg-warning" ></div>
+            <div class="p-2 bg-info" ></div>
+            {loading?<LoadInbox/>:
             <ul class="list-group">
                 {snippetList.map((mail, index)=>{
-                    
+                    console.log(mail[0]);
                     return <li class="list-group-item" key= { index } >
                         <div>
                             <div class="row">
-                                <div class="col">
-                                    <h5>{mail.messageFrom[0].value} {mail.messageDate[0].value} </h5>
-                                   
-                                    <div class="text-warning">{mail.snippet}</div>
+                                <div class="col ">
+                                    <div>
+                                    <h5 className='from' >{mail.messageFrom[0].value}  </h5>
+                                    <p className='Inboxdate'>{ mail.messageDate[0].value}</p>
+                                    </div>
+                                    <div className='snippet'>
+                                        {mail.snippet}
+                                        </div>
                                 </div>
                                 <button  class="btn  btn-sm col-1 buttom-customise" onClick={Viewpage}><FontAwesomeIcon icon={faUsersViewfinder} /></button> 
                                 <button class="btn  btn-sm col-1  buttom-customise"><FontAwesomeIcon icon={faStar} /></button>
@@ -59,7 +67,7 @@ const inbox = () => {
                         </div>
                         </li>;
                     })}
-                </ul>
+                </ul>}
                 <div>
         
 

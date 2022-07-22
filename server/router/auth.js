@@ -128,10 +128,10 @@ readGmailMessages = async () => {
   await axios(config)
     .then(async function (response) {
       data = await response.data;
-      //console.log(data);
+      console.log(data,"EMPty");
     })
     .catch(function (error) {
-      console.log(error);
+      console.log(error,"error");
     });
 
   return data;
@@ -140,16 +140,15 @@ readGmailMessages = async () => {
 // RECIEVING MAILS
 router.post("/getSnippet", async (req,res)=>{
   accessToken=req.body.currentAccess;
-
+  console.log(accessToken)
   const snippetsArray=[];
   const threadIdListObject = await readGmailMessages();
-  console.log(threadIdListObject, "Threads");
+
+// console.log(threadIdListObject);
 
   threadIdListObject.messages.forEach(async (msg)=>{
       const message = await readGmailContent(msg.threadId);
-      if(snippetsArray.length==1){
-        //console.log(JSON.stringify(message));
-      }
+      //console.log(JSON.stringify(message));
 
       //Populating snippet array
       snippetsArray.push({
@@ -162,6 +161,7 @@ router.post("/getSnippet", async (req,res)=>{
       });
      
       if(snippetsArray.length == 30){
+
         console.log("passed");
         res.json(snippetsArray);
       }
