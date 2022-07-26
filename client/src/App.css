@@ -243,6 +243,7 @@ body {
 .draft {
   margin-right: 0.5rem;
 }
+
 /*View mail CSS*/
 .view-box{
   margin-top: 6%;
@@ -287,9 +288,17 @@ body {
   font-weight: 400;
   color: rgb(86, 72, 72);
 }
-.Inboxdate{
-  margin-left: auto;
-  float: right;
+.messageCont{
+  border-right: 1px dotted gray;
+}
+.messageHead{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.inboxBtn{
+  width:30px !important;
+  padding:0px !important;
 }
 .composeCont, .draftCont, .inboxCont, .sentCont, .trashCont, .starCont, .viewCont{
   display:flex;
@@ -298,3 +307,4 @@ body {
 .draftCont, .inboxCont, .sentCont, .trashCont, .staredCont{
   padding:20px;
 }
+

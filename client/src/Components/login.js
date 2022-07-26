@@ -14,7 +14,7 @@ const login = ()=>{
       localStorage.setItem("accessToken", gapi.auth.getToken().access_token);
       setTimeout(()=>{
         window.location.reload();
-      },1000);
+      },2000);
   }
 
   const googleFailure =(error)=>{

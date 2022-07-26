@@ -76,7 +76,7 @@ function Navbar() {
                         <i className=" me-3"></i><span>Drafts</span>
                       </Link>
                     }
-                    <Link to="/inbox" className="list-group-item list-group-item-action py-2 ripple">
+                    <Link to="/" className="list-group-item list-group-item-action py-2 ripple">
                       <i className="me-3"></i><span>Others</span>
                     </Link>
                 </div>
