@@ -3,7 +3,6 @@ import {BrowserRouter, Switch, Route, Routes} from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 import Login from "./Components/login";
 import Topbar from "./Components/topbar";
-import Navbar from './Components/navbar';
 import Inbox from './Components/inbox';
 import Sent from './Components/sent'
 import Stared from './Components/stared'

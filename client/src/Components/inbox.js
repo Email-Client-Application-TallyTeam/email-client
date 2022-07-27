@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import axios from 'axios';
-
+import moment from 'moment';
 import { useState} from 'react';
 import {useNavigate} from 'react-router-dom'
 import LoadInbox from './LoadInbox';
@@ -48,22 +48,21 @@ const inbox = () => {
             {loading?<LoadInbox/>:
             <ul class="list-group">
                 {snippetList.map((mail, index)=>{
-                    console.log(mail[0]);
                     return <li class="list-group-item" key= { index } >
                         <div>
                             <div class="row">
-                                <div class="col ">
-                                    <div>
-                                    <h5 className='from' >{mail.messageFrom[0].value}  </h5>
-                                    <p className='Inboxdate'>{ mail.messageDate[0].value}</p>
+                                <div class="col-11 messageCont">
+                                    <div className="messageHead">
+                                        <h6 className='from' >{(mail.messageFrom[0].value).match(/[\s\S]*?(?=<)/)}</h6>
+                                        <p className='Inboxdate'>{ moment(mail.messageDate[0].value).startOf('hour').fromNow() } </p>
                                     </div>
                                     <div className='snippet'>
-                                        {mail.snippet}
-                                        </div>
+                                        <p><strong>{mail.messageSubject[0].value}</strong>&nbsp;-&nbsp;{mail.snippet}</p>
+                                    </div>
                                 </div>
-                                <button  class="btn  btn-sm col-1 buttom-customise"  title="View Mail" onClick={Viewpage(mail.messageId[0].value)}><FontAwesomeIcon icon={faUsersViewfinder} /></button> 
-                                <button class="btn  btn-sm col-1  buttom-customise" title="Star Mail"><FontAwesomeIcon icon={faStar} /></button>
-                                <button class="btn  btn-sm col-1 buttom-customise"  title="Reply to mail"><FontAwesomeIcon icon={faArrowUp} /></button> 
+                                <button className="btn  btn-xs col-1 inboxBtn" style={{marginLeft:5}} onClick={Viewpage}><FontAwesomeIcon icon={faUsersViewfinder} /></button> 
+                                <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faStar} /></button>
+                                <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faArrowUp} /></button> 
                             </div>
                         </div>
                         </li>;

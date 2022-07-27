@@ -88,17 +88,17 @@ router.post("/send", async (req, res) => {
 
 })
 
+
 // RECIEVING MAILS - Boilerplate Code
-
-// readGmailContent = async (messageId) => {
-//   var config = {
-//     method: "get",
-//     url: `https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}`,
-//     headers: {
-//       Authorization: `Bearer ${await accessToken}`,
-//     },
-//   };
-
+readGmailContent = async (messageId) => {
+  var config = {
+    method: "get",
+    url: `https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}`,
+    headers: {
+      Authorization: `Bearer ${await accessToken}`,
+    },
+  };
+}
 //   var data = {};
 
 //   await axios(config)
@@ -161,7 +161,6 @@ router.post("/getSnippet", async (req,res)=>{
       });
      
       if(snippetsArray.length == 30){
-
         console.log("passed");
         res.json(snippetsArray);
       }
@@ -176,7 +175,6 @@ router.post("/getSnippet", async (req,res)=>{
 
 
 // RECIEVING DRAFTS
-
 readDraftContent = async (messageId) => {
   var config = {
     method: "get",
@@ -246,15 +244,10 @@ router.post("/getDraft", async (req,res)=>{
         
       });
      
-      if(DraftsnippetsArray.length == 3){
+      if(DraftsnippetsArray.length == 10){
         console.log("passed");
         res.json(DraftsnippetsArray);
       }
-      //Populating message array
-      //const body=message.payload.body;
-      //const arg=JSON.stringify(body.data);
-      //const decodedStr = Buffer.from(arg, "base64").toString("utf8");
-      //console.log(decodedStr);
   })
 })
 
