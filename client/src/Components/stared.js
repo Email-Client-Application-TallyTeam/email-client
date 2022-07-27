@@ -27,7 +27,7 @@ const stared = () => {
                                     <h5>{mail.sender} </h5>
                                     <div class="text-warning">{mail.date}</div>
                                 </div>
-                                <button class="btn  btn-sm col-1  buttom-customise"><FontAwesomeIcon icon={faStarHalfStroke} /></button>
+                                <button class="btn  btn-sm col-1  buttom-customise" title='Unstar this mail'><FontAwesomeIcon icon={faStarHalfStroke} /></button>
                             </div>
                             <div class="row">{mail.body}</div> 
                         </div>

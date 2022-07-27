@@ -47,7 +47,7 @@ router.post("/send", async (req, res) => {
                           subject: req.body.subject ,
                           attachments: [
                             {
-                            //f path: path
+                             path: req.body.image
                             }
                          ],
                           html: `<h4> ${req.body.message} </h4>`
@@ -90,28 +90,28 @@ router.post("/send", async (req, res) => {
 
 // RECIEVING MAILS - Boilerplate Code
 
-readGmailContent = async (messageId) => {
-  var config = {
-    method: "get",
-    url: `https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}`,
-    headers: {
-      Authorization: `Bearer ${await accessToken}`,
-    },
-  };
+// readGmailContent = async (messageId) => {
+//   var config = {
+//     method: "get",
+//     url: `https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}`,
+//     headers: {
+//       Authorization: `Bearer ${await accessToken}`,
+//     },
+//   };
 
-  var data = {};
+//   var data = {};
 
-  await axios(config)
-    .then(async function (response) {
-      data = await response.data;
-      //console.log(data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+//   await axios(config)
+//     .then(async function (response) {
+//       data = await response.data;
+//       //console.log(data);
+//     })
+//     .catch(function (error) {
+//       console.log(error);
+//     });
 
-  return data;
-};
+//   return data;
+// };
 
 
 readGmailMessages = async () => {
@@ -144,7 +144,7 @@ router.post("/getSnippet", async (req,res)=>{
   const snippetsArray=[];
   const threadIdListObject = await readGmailMessages();
 
-// console.log(threadIdListObject);
+// // console.log(threadIdListObject);
 
   threadIdListObject.messages.forEach(async (msg)=>{
       const message = await readGmailContent(msg.threadId);

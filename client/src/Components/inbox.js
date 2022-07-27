@@ -25,9 +25,10 @@ const inbox = () => {
         fetchSnippet();
     },0)
 
-    const Viewpage= async()=>{
+    const Viewpage= async(id)=>{
         // const data=await axios.post("/getSnippet",{currentAccess});
         // console.log(data);
+        console.log(id);
         history('/view')
     }
     
@@ -60,9 +61,9 @@ const inbox = () => {
                                         {mail.snippet}
                                         </div>
                                 </div>
-                                <button  class="btn  btn-sm col-1 buttom-customise" onClick={Viewpage}><FontAwesomeIcon icon={faUsersViewfinder} /></button> 
-                                <button class="btn  btn-sm col-1  buttom-customise"><FontAwesomeIcon icon={faStar} /></button>
-                                <button class="btn  btn-sm col-1 buttom-customise"><FontAwesomeIcon icon={faArrowUp} /></button> 
+                                <button  class="btn  btn-sm col-1 buttom-customise"  title="View Mail" onClick={Viewpage(mail.messageId[0].value)}><FontAwesomeIcon icon={faUsersViewfinder} /></button> 
+                                <button class="btn  btn-sm col-1  buttom-customise" title="Star Mail"><FontAwesomeIcon icon={faStar} /></button>
+                                <button class="btn  btn-sm col-1 buttom-customise"  title="Reply to mail"><FontAwesomeIcon icon={faArrowUp} /></button> 
                             </div>
                         </div>
                         </li>;
@@ -78,6 +79,7 @@ const inbox = () => {
                     onClick={() => {
                     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
                     }}
+                    title='move to top'
                     style={{
                     position: 'fixed',
                     padding: '1rem 2rem',
