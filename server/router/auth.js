@@ -98,20 +98,20 @@ readGmailContent = async (messageId) => {
       Authorization: `Bearer ${await accessToken}`,
     },
   };
-}
-//   var data = {};
 
-//   await axios(config)
-//     .then(async function (response) {
-//       data = await response.data;
-//       //console.log(data);
-//     })
-//     .catch(function (error) {
-//       console.log(error);
-//     });
+  var data = {};
 
-//   return data;
-// };
+  await axios(config)
+    .then(async function (response) {
+      data = await response.data;
+      //console.log(data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  return data;
+};
 
 
 readGmailMessages = async () => {
@@ -148,6 +148,7 @@ router.post("/getSnippet", async (req,res)=>{
 
   threadIdListObject.messages.forEach(async (msg)=>{
       const message = await readGmailContent(msg.threadId);
+      console.log(message.payload.headers);
       //console.log(JSON.stringify(message));
 
       //Populating snippet array

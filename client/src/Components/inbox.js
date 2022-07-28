@@ -60,9 +60,9 @@ const inbox = () => {
                                         <p><strong>{mail.messageSubject[0].value}</strong>&nbsp;-&nbsp;{mail.snippet}</p>
                                     </div>
                                 </div>
-                                <button className="btn  btn-xs col-1 inboxBtn" style={{marginLeft:5}} onClick={Viewpage}><FontAwesomeIcon icon={faUsersViewfinder} /></button> 
-                                <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faStar} /></button>
-                                <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faArrowUp} /></button> 
+                                <button className="btn  btn-xs col-1 inboxBtn" style={{marginLeft:5}} onClick={Viewpage(mail.messageId[0].value)} title="Read mail"><FontAwesomeIcon icon={faUsersViewfinder} /></button> 
+                                <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faStar}  title="star mail"/></button>
+                                <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faArrowUp} title="reply mail" /></button> 
                             </div>
                         </div>
                         </li>;
