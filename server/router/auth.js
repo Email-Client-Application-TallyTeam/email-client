@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const multer = require('multer');
+const moment= require("moment");
 const fs= require ('fs')
 const nodemailer = require('nodemailer');
 var bodyParser = require('body-parser')
@@ -141,6 +141,7 @@ router.post("/getSnippet", async (req,res)=>{
   accessToken=req.body.currentAccess;
   console.log(accessToken)
   const snippetsArray=[];
+  
   const threadIdListObject = await readGmailMessages();
 
  console.log(threadIdListObject);
@@ -167,9 +168,15 @@ router.post("/getSnippet", async (req,res)=>{
         messageSubject:message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null),
         messageBody:decodedStr
       });
+      
+      
 
       if(snippetsArray.length == 50){
         console.log("passed");
+        snippetsArray.sort(function(a,b){
+          return new Date(b.messageDate[0].value) - new Date(a.messageDate[0].value);
+        });
+        
         res.json(snippetsArray);
       }
 
@@ -194,7 +201,7 @@ readDraftContent = async (messageId) => {
   await axios(config)
     .then(async function (response) {
       data = await response.data;
-      console.log(data);
+      //console.log(data);
     })
     .catch(function (error) {
       console.log(error);
@@ -217,7 +224,7 @@ readGmailDrafts = async () => {
   await axios(config)
     .then(async function (response) {
       data = await response.data;
-      console.log(data);
+      //console.log(data);
     })
     .catch(function (error) {
       console.log(error);
@@ -236,8 +243,7 @@ router.post("/getDraft", async (req,res)=>{
 
   DraftIdListObject.drafts.forEach(async (msg)=>{
       const draft = await readDraftContent(msg.id);
-      //console.log(draft.payload.message);
-      console.log(draft.message.payload.headers)
+      //console.log(draft.message.payload.headers)
       //Populating snippet array
       DraftsnippetsArray.push({
         draftId:draft.id,

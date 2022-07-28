@@ -28,6 +28,7 @@ const inbox = () => {
         navigate('/view',{state:{ id: messageId} });
     }
     
+    
     return (
        <div className="inboxCont">
        <Navbar/>
@@ -57,11 +58,11 @@ const inbox = () => {
                                         <p><strong>{mail.messageSubject[0].value}</strong>&nbsp;-&nbsp;{mail.snippet}</p>
                                     </div>
                                 </div>
-                                <button className="btn  btn-xs col-1 inboxBtn" style={{marginLeft:5}} onClick={e=>Viewpage(mail.messageId)}>
+                                <button className="btn  btn-xs col-1 inboxBtn" title="View" style={{marginLeft:5}} onClick={e=>Viewpage(mail.messageId)}>
                                     <FontAwesomeIcon icon={faUsersViewfinder} />
                                 </button> 
-                                <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faStar} /></button>
-                                <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faArrowUp} /></button> 
+                                <button className="btn  btn-xs col-1 inboxBtn" title="Star"><FontAwesomeIcon icon={faStar} /></button>
+                                <button className="btn  btn-xs col-1 inboxBtn" title="Reply"><FontAwesomeIcon icon={faArrowUp} /></button> 
                             </div>
                         </div>
                         </li>;
