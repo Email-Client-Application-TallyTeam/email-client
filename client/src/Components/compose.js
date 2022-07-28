@@ -3,18 +3,20 @@ import axios from 'axios';
 import Navbar from '../Components/navbar';
 import Loading from '../Components/loading'
 function Compose() {
-  const [attach,setAttach]= useState(null);
+  const [attach,setAttach]= useState("");
   const [mail,setMail] = useState(
     {
-      from:"",to:"",subject:"", message:"",image: null,accessToken:""
+      from:"",to:"",subject:"", message:"",image: "",accessToken:""
     }
   )
   const[loading,setLoading] = useState(false);
   const x= localStorage.getItem('userData');
   const a = JSON.parse(x);
   //console.log(a.wt.Ad);
+  const[file1,setFile1]= useState("")
   const uploadFile=(e)=>{
-       const file = e.target.files[0];
+        setFile1(e.target.files[0]);
+       console.log(e.target.value)
         setAttach(e.target.value);
       // axios.get("https://cloudinary.com/console/c-00a7fa10a33a9f6cf645f1f1744df9/media_library/folders/home").then((res)=>{
       //   console.log(res);
@@ -55,11 +57,15 @@ function Compose() {
     setLoading(true)
    
     const formData = new FormData();
-    formData.append("file",attach);
+    formData.append("file",file1);
+    console.log(file1);
     formData.append("upload_preset","vuejelu8");
-    axios.post("https://api.cloudinary.com/v1_1/dtengisxr/image/upload", formData).then((res)=>{
+    await axios.post("https://api.cloudinary.com/v1_1/dtengisxr/image/upload", formData).then((res)=>{
       console.log("success",res.data.secure_url);
+      console.log(res.data.secure_url)
       mail.image=res.data.secure_url;
+    //  setMail({...mail,["image"]:res.data.secure_url});
+      console.log(mail);
     }).catch(function (error) {
       console.log("no  attach",error);
     });
@@ -69,7 +75,7 @@ function Compose() {
   if(data.status==200){
 
     window.alert("Mail sent successfully");
-    console.log("mail add "+mail.image);
+    console.log("mail add "+ mail.image);
     setLoading(false);
    }
    else{
@@ -102,7 +108,7 @@ function Compose() {
         <textarea class="form-control" id="exampleFormControlTextarea1" name='message' value={mail.message || ''} onChange={(e)=>handleInput(e)} rows="9"></textarea>
       </div>
       {loading? <Loading/>: <button  type="submit" class=" send btn btn-primary mb-3" onClick={sendMail}>Send</button>}
-      <input type="file"  name='image' value={attach || null } onChange={uploadFile} id="inputGroupFile01"  ></input>
+      <input type="file"  name='image' value={attach || '' } onChange={uploadFile} id="inputGroupFile01"  ></input>
       <button type="submit" class=" draft btn btn-primary mb-3 " onClick={uploadFile}>Save as draft</button>
     </div>
     </div>
