@@ -6,30 +6,26 @@ import {useNavigate} from 'react-router-dom'
 import LoadInbox from './LoadInbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar,faArrowUp,faUsersViewfinder } from '@fortawesome/free-solid-svg-icons';
-import { NavLink } from 'react-router-dom';
 import Navbar from '../Components/navbar';
 
 const inbox = () => {
-    let history = useNavigate();
+    let navigate= useNavigate();
    
     const [snippetList, setSnippetList] = useState([]);
-    const[loading,setLoading] = useState(true);
+    const [loading,setLoading] = useState(true);
+
     useEffect(()=>{
         async function fetchSnippet() {
             const currentAccess=localStorage.getItem('accessToken')
             const data= await axios.post("/getSnippet",{currentAccess});
             setLoading(false);
-            console.log(data.data);
             setSnippetList(data.data);
           }
         fetchSnippet();
     },0)
 
-    const Viewpage= async(id)=>{
-        // const data=await axios.post("/getSnippet",{currentAccess});
-        // console.log(data);
-        console.log(id);
-        history('/view')
+    const Viewpage= async(messageId)=>{
+        navigate('/view',{state:{ id: messageId} });
     }
     
     return (
@@ -60,9 +56,11 @@ const inbox = () => {
                                         <p><strong>{mail.messageSubject[0].value}</strong>&nbsp;-&nbsp;{mail.snippet}</p>
                                     </div>
                                 </div>
-                                <button className="btn  btn-xs col-1 inboxBtn" style={{marginLeft:5}} onClick={Viewpage(mail.messageId[0].value)} title="Read mail"><FontAwesomeIcon icon={faUsersViewfinder} /></button> 
-                                <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faStar}  title="star mail"/></button>
-                                <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faArrowUp} title="reply mail" /></button> 
+                                <button className="btn  btn-xs col-1 inboxBtn" style={{marginLeft:5}} onClick={e=>Viewpage(mail.messageId)}>
+                                    <FontAwesomeIcon icon={faUsersViewfinder} />
+                                </button> 
+                                <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faStar} /></button>
+                                <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faArrowUp} /></button> 
                             </div>
                         </div>
                         </li>;
