@@ -31,6 +31,7 @@ const inbox = () => {
         history('/view')
     }
     
+    
     return (
        <div className="inboxCont">
        <Navbar/>
