@@ -17,9 +17,9 @@ const draft = () => {
         async function fetchDraft() {
             const currentAccess=localStorage.getItem('accessToken')
             const data= await axios.post("/getDraft",{currentAccess});
-            setLoading(false);
             console.log(data.data);
             setDraftList(data.data);
+            setLoading(false);
           }
         fetchDraft();
     },0)
@@ -35,7 +35,7 @@ const draft = () => {
                     </form>
                 </nav>
             </div>
-            <div class="p-2 bg-warning" ></div>
+            <div class="p-2 bg-info" ></div>
             {loading?<LoadInbox/>:
             <ul class="list-group">
                 {DraftList.map((mail, index)=>{
@@ -44,8 +44,8 @@ const draft = () => {
                             <div class="row">
                                 <div class="col">
                                     <div className="messageHead">
-                                        {mail.draftTo[0].value===undefined?<div>No from field</div>:<h6 className='from' >{mail.draftTo[0].value}</h6>}
-                                        {mail.draftDate[0].value===undefined?<div>No date spacified </div> :<p className='Inboxdate'>{ moment(mail.draftDate[0].value).startOf('hour').fromNow() } </p>}
+                                        {mail.draftTo[0]===undefined?<div>No from field</div>:<h6 className='from' >{mail.draftTo[0].value} </h6>}
+                                        {mail.draftDate[0]===undefined?<div>No date spacified </div> :<p className='Inboxdate'>{ moment(mail.draftDate[0].value).startOf('hour').fromNow() } </p>}
                                     </div>
                                     <div className='snippet'>
                                         <p>&nbsp;-&nbsp;{mail.Msnippet}</p>

@@ -1,15 +1,16 @@
 import React, { useEffect }  from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 import { useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faInbox, faArrowAltCircleRight, faTrash, faPager, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faInbox, faArrowAltCircleLeft, faTrash, faPager, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../Components/navbar';
 import LoadInbox from './LoadInbox';
 
 export const ViewMail = () => {
   const location = useLocation();
+  const navigate= useNavigate();
   const [loading,setLoading] = useState(true);
   const [currentMsg, setCurrentMsg] = useState({
     messageId:"",
@@ -18,7 +19,10 @@ export const ViewMail = () => {
     messageSubject:"",
     messageBody:"",
     messageTo:""
-})
+  })
+  const path=()=>{
+    navigate('/')
+   }
 
   useEffect(()=>{
       async function fetchSnippet() {
@@ -47,34 +51,37 @@ export const ViewMail = () => {
   return (
     <div>
       <Navbar/>
-      <div className="view-box"> 
-           {loading? <LoadInbox/> :
+      <div className="view-box">
+          {loading? <LoadInbox/> :
               <div>
-                  <div class="mb-3">   
-                  <div className='sender'>
-                  <p className='Inboxdate'>{ moment(currentMsg.messageDate.value).format("YYYY-MM-DD") } </p>
-                    <button  class="star"><FontAwesomeIcon icon={faStar}></FontAwesomeIcon></button>
-                    <button  class="star"><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>
-                    <div className='from'>{(currentMsg.messageFrom).match(/[\s\S]*?(?=<)/)}</div>
-                    <div className='Email'>From :&#60;{(currentMsg.messageFrom).match(/(?<=\<).*/)}</div>
-                    <div className='Email'>To : {(currentMsg.messageTo)}</div>
+                  <div class="mb-3">  
+                    <div className='sender'>
+                      <button className="btn btn-md col-1 inboxBtn" title='Back to inbox' onClick={path}><FontAwesomeIcon icon={faArrowAltCircleLeft} /></button>
+                      <div className='subject'>{(currentMsg.messageSubject)}</div>
+                      <p className='Inboxdate'>{ moment(currentMsg.messageDate.value).format("YYYY-MM-DD") } </p>
+                      <div className='viewIcons'>
+                          <button  class="viewIconCont1"><FontAwesomeIcon icon={faStar}></FontAwesomeIcon></button>
+                          <button  class="viewIconCont2"><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>
+                      </div>
+                      <div className='from'>{(currentMsg.messageFrom).match(/[\s\S]*?(?=<)/)}</div>
+                      <div className='Email'>From :&#60;{(currentMsg.messageFrom).match(/(?<=\<).*/)}</div>
+                      <div className='Email'>To : {(currentMsg.messageTo)}</div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label"></label>
+                    <div className='viewsnippet'>{currentMsg.snippet}</div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label"></label>
+                    <div className='body'>
+                      {currentMsg.messageBody}
+                    </div>
                   </div>
                 </div>
-
-                <div class="mb-3">
-                  <label for="exampleFormControlInput1" class="form-label"></label>
-                  <div className='viewsnippet'>{currentMsg.snippet}</div>
-                </div>
-
-                <div class="mb-3">
-                  <label for="exampleFormControlInput1" class="form-label"></label>
-                  <div className='body'>
-                    {currentMsg.messageBody}
-                  </div>
-                </div>
-              </div>
-           }
-        </div>
-    </div>
+            }
+          </div>
+  </div>
   )
 }

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const multer = require('multer');
+const moment= require("moment");
 const fs= require ('fs')
 const nodemailer = require('nodemailer');
 var bodyParser = require('body-parser')
@@ -141,6 +141,7 @@ router.post("/getSnippet", async (req,res)=>{
   accessToken=req.body.currentAccess;
   console.log(accessToken)
   const snippetsArray=[];
+  
   const threadIdListObject = await readGmailMessages();
 
 // console.log(threadIdListObject);
@@ -165,9 +166,15 @@ router.post("/getSnippet", async (req,res)=>{
         messageSubject:message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null),
         messageBody:decodedStr
       });
+      
+      
 
       if(snippetsArray.length == 50){
         console.log("passed");
+        snippetsArray.sort(function(a,b){
+          return new Date(b.messageDate[0].value) - new Date(a.messageDate[0].value);
+        });
+        
         res.json(snippetsArray);
       }
 
@@ -246,7 +253,7 @@ router.post("/getDraft", async (req,res)=>{
         
       });
      
-      if(DraftsnippetsArray.length == 3){
+      if(DraftsnippetsArray.length == 10){
         console.log("passed");
         res.json(DraftsnippetsArray);
       }
