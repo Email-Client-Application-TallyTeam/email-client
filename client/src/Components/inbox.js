@@ -49,6 +49,7 @@ const inbox = () => {
                             <div class="row">
                                 <div class="col-11 messageCont">
                                     <div className="messageHead">
+                                       
                                         <h6 className='from' >{(mail.messageFrom[0].value).match(/[\s\S]*?(?=<)/)}</h6>
                                         <p className='Inboxdate'>{ moment(mail.messageDate[0].value).startOf('hour').fromNow() } </p>
                                     </div>

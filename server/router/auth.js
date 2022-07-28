@@ -152,6 +152,7 @@ router.post("/getSnippet", async (req,res)=>{
      
       //Populating message array
       const body=message.payload.parts[0].body.data;
+      console.log(body);
       const arg=JSON.stringify(body);
       const decodedStr = Buffer.from(arg, "base64").toString("utf8");
       //console.log(decodedStr);

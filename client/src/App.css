@@ -267,12 +267,19 @@ body {
   color: grey;
 }
 .viewsnippet{
+ 
   font-weight: 600;
   font-size: 1.5rem;
   letter-spacing: 0.1rem;
   color:black;
 }
-
+.subject{
+  padding-bottom: 1.5rem;
+  font-weight: 600;
+  font-size: 2.5rem;
+  letter-spacing: 0.1rem;
+  color:black;
+}
 .body{
   color: gray;
   font-weight: 450;
@@ -283,6 +290,16 @@ body {
   background-color: #fbfbfb;
   border: none;
   margin-left: 1rem;
+  margin-top: 3rem;
+  
+}
+.viewIcons{
+  margin-right: 1rem;
+}
+.Inboxdate{
+  margin-left: auto;
+  float: right;
+ 
 }
 .snippet{
   font-weight: 400;
