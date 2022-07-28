@@ -192,7 +192,7 @@ readDraftContent = async (messageId) => {
   await axios(config)
     .then(async function (response) {
       data = await response.data;
-      console.log(data);
+      //console.log(data);
     })
     .catch(function (error) {
       console.log(error);
@@ -215,7 +215,7 @@ readGmailDrafts = async () => {
   await axios(config)
     .then(async function (response) {
       data = await response.data;
-      console.log(data);
+      //console.log(data);
     })
     .catch(function (error) {
       console.log(error);
@@ -234,8 +234,7 @@ router.post("/getDraft", async (req,res)=>{
 
   DraftIdListObject.drafts.forEach(async (msg)=>{
       const draft = await readDraftContent(msg.id);
-      //console.log(draft.payload.message);
-      console.log(draft.message.payload.headers)
+      //console.log(draft.message.payload.headers)
       //Populating snippet array
       DraftsnippetsArray.push({
         draftId:draft.id,
@@ -247,7 +246,7 @@ router.post("/getDraft", async (req,res)=>{
         
       });
      
-      if(DraftsnippetsArray.length == 10){
+      if(DraftsnippetsArray.length == 3){
         console.log("passed");
         res.json(DraftsnippetsArray);
       }

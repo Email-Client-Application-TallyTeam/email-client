@@ -28,6 +28,7 @@ const inbox = () => {
         navigate('/view',{state:{ id: messageId} });
     }
     
+    
     return (
        <div className="inboxCont">
        <Navbar/>
