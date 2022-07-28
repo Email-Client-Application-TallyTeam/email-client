@@ -8,7 +8,6 @@ const {google}= require('googleapis');
 const { json } = require("express");
 var path
 router.use(bodyParser.json());
-const REDIRECT_URI="https://www.youtube.com/watch?v=iUNkYi2ggvc";  /*isn't making diff */
 const axios = require("axios");
 const qs = require("qs");
 
@@ -149,7 +148,13 @@ router.post("/getSnippet", async (req,res)=>{
   threadIdListObject.messages.forEach(async (msg)=>{
       const message = await readGmailContent(msg.threadId);
       //console.log(JSON.stringify(message));
-
+     
+      //Populating message array
+      const body=message.payload.parts[0].body.data;
+      const arg=JSON.stringify(body);
+      const decodedStr = Buffer.from(arg, "base64").toString("utf8");
+      //console.log(decodedStr);
+      
       //Populating snippet array
       snippetsArray.push({
         messageId:message.id,
@@ -157,20 +162,18 @@ router.post("/getSnippet", async (req,res)=>{
         messageFrom:message.payload.headers.filter((data)=>data.name==="From"?data.value:null),
         messageTo:message.payload.headers.filter((data)=>data.name==="To"?data.value:null),
         messageDate:message.payload.headers.filter((data)=>data.name==="Date"?data.value:null),
-        messageSubject:message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null)
+        messageSubject:message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null),
+        messageBody:decodedStr
       });
-     
-      if(snippetsArray.length == 30){
+
+      if(snippetsArray.length == 50){
         console.log("passed");
         res.json(snippetsArray);
       }
-      //Populating message array
-      //const body=message.payload.body;
-      //const arg=JSON.stringify(body.data);
-      //const decodedStr = Buffer.from(arg, "base64").toString("utf8");
-      //console.log(decodedStr);
+
   })
 })
+
 
 
 
