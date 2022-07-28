@@ -36,7 +36,7 @@ function topbar() {
                     window.location.pathname==="/login"?null:
                     <div>
                       <button className="btn btn-secondary" type="button" aria-haspopup="true" aria-expanded="false">
-                        <img src={user.imageUrl} alt="User Image" className="userImage"/>
+                        <img src={user.imageUrl} alt="User Image" referrerpolicy="no-referrer" className="userImage"/>
                         {user.name}
                       </button> 
                     </div>        
