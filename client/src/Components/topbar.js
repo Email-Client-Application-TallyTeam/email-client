@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import {GoogleLogout} from 'react-google-login';
 
 function topbar() {
@@ -7,6 +7,7 @@ function topbar() {
   const navigateTo = useNavigate();
 
   let user="";
+
   if(localStorage.getItem("userData")){
       const userData=localStorage.getItem("userData");
       console.log(JSON.parse(userData));
@@ -21,14 +22,14 @@ function topbar() {
   return (
     <div className="navbar bg-dark fixed-top topbar">
       <div className="leftBar">
-        <a className="navbar-brand text-white" href="#">TallyMail</a>
+        <Link to="/" className="navbar-brand text-white">TallyMail</Link>
       </div>
       <div className="rightBar">
           <div className="nav-item active">
-            <a className="nav-link text-white" href="#">About</a>
+            <a className="nav-link text-white">About</a>
           </div>
           <div className="nav-item">
-            <a className="nav-link text-white" href="#">Support</a>
+            <a className="nav-link text-white">Support</a>
           </div>
           <div className="nav-item">
                   <div className="dropdown">
@@ -36,7 +37,7 @@ function topbar() {
                     window.location.pathname==="/login"?null:
                     <div>
                       <button className="btn btn-secondary" type="button" aria-haspopup="true" aria-expanded="false">
-                        <img src={user.imageUrl} alt="User Image" referrerpolicy="no-referrer" className="userImage"/>
+                        <img src={user.imageUrl} alt="" referrerPolicy="no-referrer" className="userImage"/>
                         {user.name}
                       </button> 
                     </div>        

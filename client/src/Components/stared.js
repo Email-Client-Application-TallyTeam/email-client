@@ -19,8 +19,8 @@ const stared = () => {
         async function fetchSnippet() {
             const currentAccess=localStorage.getItem('accessToken')
             const data= await axios.post("/getStaredSnippet",{currentAccess});
-            setLoading(false);
             setStaredSnippetList(data.data);
+            setLoading(false);
           }
         fetchSnippet();
     },0)

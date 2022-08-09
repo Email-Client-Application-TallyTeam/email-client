@@ -112,7 +112,6 @@ readGmailContent = async (messageId) => {
   return data;
 };
 
-
 readGmailMessages = async () => {
   var config = {
     method: "get",
@@ -136,25 +135,25 @@ readGmailMessages = async () => {
   return data;
 };
 
-// RECIEVING MAILS
 router.post("/getSnippet", async (req,res)=>{
   accessToken=req.body.currentAccess;
   console.log(accessToken)
   const snippetsArray=[];
   
   const threadIdListObject = await readGmailMessages();
-
+  let count=0;
 // console.log(threadIdListObject);
-
   threadIdListObject.messages.forEach(async (msg)=>{
+      count++;
       const message = await readGmailContent(msg.threadId);
       //console.log(JSON.stringify(message));
      
       //Populating message array
       const body=message.payload.parts[0].body.data;
       const arg=JSON.stringify(body);
-      const decodedStr = Buffer.from(arg, "base64").toString("utf8");
-      console.log(decodedStr);
+      decodedStr = Buffer.from(arg, "base64").toString("utf8");
+        
+
       
       //Populating snippet array
       snippetsArray.push({
@@ -166,16 +165,65 @@ router.post("/getSnippet", async (req,res)=>{
         messageSubject:message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null),
         messageBody:decodedStr
       });
-      
-      
 
-      if(snippetsArray.length == 50){
+      console.log(snippetsArray.length, count);
+      if(snippetsArray.length === 75){
         console.log("passed");
         snippetsArray.sort(function(a,b){
           return new Date(b.messageDate[0].value) - new Date(a.messageDate[0].value);
         });
-        
         res.json(snippetsArray);
+      }
+
+  })
+})
+
+
+//RECIEVING_STARRED 
+router.post("/getStaredSnippet", async (req,res)=>{
+  accessToken=req.body.currentAccess;
+  console.log(accessToken)
+  const StaredsnippetsArray=[];
+  const threadIdListObject = await readGmailMessages();
+
+  threadIdListObject.messages.forEach(async (msg)=>{
+      const message = await readGmailContent(msg.threadId);
+      //console.log(JSON.stringify(message));
+
+      //Populating message array
+      const body=message.payload.parts[0].body.data;
+      const arg=JSON.stringify(body);
+      const decodedStr = Buffer.from(arg, "base64").toString("utf8");
+      console.log(decodedStr);
+      
+      //Checking if message has field named starred
+      let isStared =0;
+      message.labelIds.forEach((label)=>{
+        if(label==="STARRED"){
+          isStared=1;
+        }
+      })
+
+      if(isStared==1){
+        StaredsnippetsArray.push({
+          messageId:message.id,
+          snippet:message.snippet,
+          messageFrom:message.payload.headers.filter((data)=>data.name==="From"?data.value:null),
+          messageTo:message.payload.headers.filter((data)=>data.name==="To"?data.value:null),
+          messageDate:message.payload.headers.filter((data)=>data.name==="Date"?data.value:null),
+          messageSubject:message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null),
+          messageBody:decodedStr
+        });
+      }
+
+      console.log(StaredsnippetsArray);
+
+      if(StaredsnippetsArray.length == 5){
+        console.log("passed");
+        StaredsnippetsArray.sort(function(a,b){
+          return new Date(b.messageDate[0].value) - new Date(a.messageDate[0].value);
+        });
+        res.json(StaredsnippetsArray);
       }
 
   })
@@ -235,13 +283,24 @@ router.post("/getDraft", async (req,res)=>{
   accessToken=req.body.currentAccess;
 
   const DraftsnippetsArray=[];
-  const draftArray=[];
   const DraftIdListObject = await readGmailDrafts();
   //console.log(DraftIdListObject, "Threads");
-
+  let count= 0;
   DraftIdListObject.drafts.forEach(async (msg)=>{
+      count++;
       const draft = await readDraftContent(msg.id);
-      //console.log(draft.message.payload.headers)
+      let decodedStr = "";
+
+      if(draft.payload!==undefined){
+        if(draft.payload.parts!==undefined){
+          if(draft.payload.parts[0]!=undefined){
+            const body=draft.payload.parts[0].body.data;
+            const arg=JSON.stringify(body);
+            decodedStr = Buffer.from(arg, "base64").toString("utf8");
+          }
+        }
+      }
+    
       //Populating snippet array
       DraftsnippetsArray.push({
         draftId:draft.id,
@@ -249,120 +308,21 @@ router.post("/getDraft", async (req,res)=>{
         draftFrom:draft.message.payload.headers.filter((data)=>data.name==="From"?data.value:null),
         draftTo:draft.message.payload.headers.filter((data)=>data.name==="To"?data.value:null),
         draftDate:draft.message.payload.headers.filter((data)=>data.name==="Date"?data.value:null),
-        draftSubject:draft.message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null)
-        
+        draftSubject:draft.message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null),
+        draftBody: decodedStr
       });
-     
-      if(DraftsnippetsArray.length == 10){
+
+      console.log(DraftsnippetsArray.length, count);
+      if(DraftsnippetsArray.length === count){
         console.log("passed");
+
+        DraftsnippetsArray.sort(function(a,b){
+          return new Date(b.draftDate[0].value) - new Date(a.draftDate[0].value);
+        });
         res.json(DraftsnippetsArray);
       }
   })
 })
 
 
-
-//RECIEVING_STARRED 
-
-
-readGmailContent = async (messageId) => {
-  var config = {
-    method: "get",
-    url: `https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}`,
-    headers: {
-      Authorization: `Bearer ${await accessToken}`,
-    },
-  };
-
-  var data = {};
-
-  await axios(config)
-    .then(async function (response) {
-      data = await response.data;
-      //console.log(data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  return data;
-};
-
-
-readGmailMessages = async () => {
-  var config = {
-    method: "get",
-    url: `https://gmail.googleapis.com/gmail/v1/users/me/messages`,
-    headers: {
-      Authorization: `Bearer ${await accessToken}`,
-    },
-  };
-
-  var data = {};
-
-  await axios(config)
-    .then(async function (response) {
-      data = await response.data;
-      console.log(data,"EMPty");
-    })
-    .catch(function (error) {
-      console.log(error,"error");
-    });
-
-  return data;
-};
-
-// RECIEVING MAILS
-router.post("/getStaredSnippet", async (req,res)=>{
-  accessToken=req.body.currentAccess;
-  console.log(accessToken)
-  const StaredsnippetsArray=[];
-  const threadIdListObject = await readGmailMessages();
-
-// console.log(threadIdListObject);
-  threadIdListObject.messages.forEach(async (msg)=>{
-      const message = await readGmailContent(msg.threadId);
-      //console.log(JSON.stringify(message));
-
-      //Populating message array
-      const body=message.payload.parts[0].body.data;
-      const arg=JSON.stringify(body);
-      const decodedStr = Buffer.from(arg, "base64").toString("utf8");
-      console.log(decodedStr);
-      
-      //Populating snippet array
-      //Checking if message has field named starred
-      let isStared =0;
-      message.labelIds.forEach((label)=>{
-        if(label=="STARRED"){
-          isStared=1;
-        }
-      })
-      if(isStared==1){
-        StaredsnippetsArray.push({
-          messageId:message.id,
-          snippet:message.snippet,
-          messageFrom:message.payload.headers.filter((data)=>data.name==="From"?data.value:null),
-          messageTo:message.payload.headers.filter((data)=>data.name==="To"?data.value:null),
-          messageDate:message.payload.headers.filter((data)=>data.name==="Date"?data.value:null),
-          messageSubject:message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null),
-          messageBody:decodedStr
-        });
-      }
-
-
-      
-
-      if(StaredsnippetsArray.length == 8){
-        console.log("passed");
-        res.json(StaredsnippetsArray);
-      }
-
-  })
-})
-
-
-
-
-    
 module.exports= router;
