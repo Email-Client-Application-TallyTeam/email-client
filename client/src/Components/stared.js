@@ -4,6 +4,7 @@ import moment from 'moment';
 import { useState} from 'react';
 import {useNavigate} from 'react-router-dom'
 import LoadInbox from './LoadInbox';
+import NoMsg from './NoMsg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar,faArrowUp,faUsersViewfinder } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../Components/navbar';
@@ -14,13 +15,21 @@ const stared = () => {
 
     const [StaredsnippetList, setStaredSnippetList] = useState([]);
     const [loading,setLoading] = useState(true);
+    const [loadFail, setLoadFail] = useState(false)
 
     useEffect(()=>{
         async function fetchSnippet() {
             const currentAccess=localStorage.getItem('accessToken')
             const data= await axios.post("/getStaredSnippet",{currentAccess});
-            setStaredSnippetList(data.data);
-            setLoading(false);
+            console.log(data.data);
+            if(data.data === true){
+                setLoading(false);
+                setLoadFail(true);
+            }
+            else{
+                setStaredSnippetList(data.data);
+                setLoading(false);
+            }
           }
         fetchSnippet();
     },0)
@@ -44,28 +53,31 @@ const stared = () => {
             <div class="p-2 bg-info" ></div>
             {loading?<LoadInbox/>:
             <ul class="list-group">
-                {StaredsnippetList.map((mail, index)=>{
-                    return <li class="list-group-item" key= { index } >
-                        <div>
-                            <div class="row">
-                                <div class="col-11 messageCont">
-                                    <div className="messageHead">
-                                        <h6 className='from' >{(mail.messageFrom[0].value).match(/[\s\S]*?(?=<)/)}</h6>
-                                        <p className='Inboxdate'>{ moment(mail.messageDate[0].value).startOf('hour').fromNow() } </p>
+                {
+                    loadFail?<NoMsg />:
+                    StaredsnippetList.map((mail, index)=>{
+                        return <li class="list-group-item" key= { index } >
+                            <div>
+                                <div class="row">
+                                    <div class="col-11 messageCont">
+                                        <div className="messageHead">
+                                            <h6 className='from' >{(mail.messageFrom[0].value).match(/[\s\S]*?(?=<)/)}</h6>
+                                            <p className='Inboxdate'>{ moment(mail.messageDate[0].value).startOf('hour').fromNow() } </p>
+                                        </div>
+                                        <div className='snippet'>
+                                            <p><strong>{mail.messageSubject[0].value}</strong>&nbsp;-&nbsp;{mail.snippet}</p>
+                                        </div>
                                     </div>
-                                    <div className='snippet'>
-                                        <p><strong>{mail.messageSubject[0].value}</strong>&nbsp;-&nbsp;{mail.snippet}</p>
-                                    </div>
+                                    <button className="btn  btn-xs col-1 inboxBtn" style={{marginLeft:5}} onClick={e=>Viewpage(mail.messageId)}>
+                                        <FontAwesomeIcon icon={faUsersViewfinder} />
+                                    </button> 
+                                    <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faStar} /></button>
+                                    <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faArrowUp} /></button> 
                                 </div>
-                                <button className="btn  btn-xs col-1 inboxBtn" style={{marginLeft:5}} onClick={e=>Viewpage(mail.messageId)}>
-                                    <FontAwesomeIcon icon={faUsersViewfinder} />
-                                </button> 
-                                <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faStar} /></button>
-                                <button className="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faArrowUp} /></button> 
                             </div>
-                        </div>
-                        </li>;
-                    })}
+                            </li>;
+                        })
+                }
                 </ul>}
                 <div>
         

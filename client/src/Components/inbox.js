@@ -38,8 +38,8 @@ const inbox = () => {
 
         snippetList.forEach((msg)=>{
             count++;
-            const msgName = ((msg.messageFrom[0].value).match(/[\s\S]*?(?=<)/))[0];
-            const msgMail = ((msg.messageFrom[0].value).match(new RegExp('<' + "(.*)" + '>')))[1];
+            const msgName = ((msg.messageFrom[0].value).match(/[\s\S]*?(?=<)/)) == null?msg.messageFrom[0].value:((msg.messageFrom[0].value).match(/[\s\S]*?(?=<)/))[0];
+            const msgMail = ((msg.messageFrom[0].value).match(new RegExp('<' + "(.*)" + '>'))) == null?msg.messageFrom[0].value:((msg.messageFrom[0].value).match(new RegExp('<' + "(.*)" + '>')))[1];
 
             if( (msgName.trim() === searchObj) || (msgMail.trim() === searchObj) ){
                 searchSnippet.push(msg);

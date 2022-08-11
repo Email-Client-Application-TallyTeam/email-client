@@ -167,7 +167,7 @@ router.post("/getSnippet", async (req,res)=>{
       });
 
       console.log(snippetsArray.length, count);
-      if(snippetsArray.length === 75){
+      if(snippetsArray.length === 70){
         console.log("passed");
         snippetsArray.sort(function(a,b){
           return new Date(b.messageDate[0].value) - new Date(a.messageDate[0].value);
@@ -182,19 +182,22 @@ router.post("/getSnippet", async (req,res)=>{
 //RECIEVING_STARRED 
 router.post("/getStaredSnippet", async (req,res)=>{
   accessToken=req.body.currentAccess;
+  let count = 0;
   console.log(accessToken)
   const StaredsnippetsArray=[];
   const threadIdListObject = await readGmailMessages();
 
   threadIdListObject.messages.forEach(async (msg)=>{
+      count++;
       const message = await readGmailContent(msg.threadId);
       //console.log(JSON.stringify(message));
+
 
       //Populating message array
       const body=message.payload.parts[0].body.data;
       const arg=JSON.stringify(body);
       const decodedStr = Buffer.from(arg, "base64").toString("utf8");
-      console.log(decodedStr);
+      //console.log(decodedStr);
       
       //Checking if message has field named starred
       let isStared =0;
@@ -216,14 +219,17 @@ router.post("/getStaredSnippet", async (req,res)=>{
         });
       }
 
-      console.log(StaredsnippetsArray);
+      console.log(StaredsnippetsArray, count, threadIdListObject.length);
 
-      if(StaredsnippetsArray.length == 5){
+      if(StaredsnippetsArray.length == 1){
         console.log("passed");
         StaredsnippetsArray.sort(function(a,b){
           return new Date(b.messageDate[0].value) - new Date(a.messageDate[0].value);
         });
         res.json(StaredsnippetsArray);
+      }
+      else if(count == threadIdListObject.messages.length && StaredsnippetsArray.length==0){
+        res.json(true);
       }
 
   })
