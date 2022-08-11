@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {BrowserRouter, Switch, Route, Routes} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 import Login from "./Components/login";
 import Topbar from "./Components/topbar";
@@ -10,10 +10,10 @@ import Draft from './Components/draft'
 import Trash from './Components/trash'
 import { Viewdemo } from './Components/viewdemo';
 import Compose from './Components/compose'
+import ViewMail from './Components/viewMail';
 import './App.css';
 import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import { ViewMail } from './Components/viewMail';
 import {gapi} from 'gapi-script';
 
 const clientid="31675053631-ji1okm2bm45ppkqkm5f4rs2ju0nj18ji.apps.googleusercontent.com";

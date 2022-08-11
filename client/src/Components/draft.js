@@ -1,9 +1,8 @@
-import React,{useEffect} from 'react'
-import { useState } from 'react';
+import React,{useEffect, useState } from 'react'
 import Navbar from "./navbar";
+import {useNavigate} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import SvgFontIcons from 'react-svg-font-icons';
-import { faArrowRight,faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight,faTrash,faUsersViewfinder } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import LoadInbox from './LoadInbox';
 import moment from 'moment';
@@ -11,7 +10,8 @@ import moment from 'moment';
 
 const draft = () => {
     const [DraftList, setDraftList] = useState([]);
-    const[loading,setLoading] = useState(true);
+    const [loading,setLoading] = useState(true);
+    let navigate= useNavigate();
 
     useEffect(()=>{
         async function fetchDraft() {
@@ -23,6 +23,10 @@ const draft = () => {
           }
         fetchDraft();
     },0)
+
+    const ViewDraft= async(mail)=>{
+        navigate('/compose',{state:{ mailData: mail} });
+    }
 
     return (
         <div className='draftCont'>
@@ -45,15 +49,18 @@ const draft = () => {
                                 <div class="col">
                                     <div className="messageHead">
                                         {mail.draftTo[0]===undefined?<div>No from field</div>:<h6 className='from' >{mail.draftTo[0].value} </h6>}
-                                        {mail.draftDate[0]===undefined?<div>No date spacified </div> :<p className='Inboxdate'>{ moment(mail.draftDate[0].value).startOf('hour').fromNow() } </p>}
+                                        {mail.draftDate[0]===undefined?<div>No date specified </div> :<p className='Inboxdate'>{ moment(mail.draftDate[0].value).startOf('hour').fromNow() } </p>}
                                     </div>
                                     <div className='snippet'>
                                         <p>&nbsp;-&nbsp;{mail.Msnippet}</p>
                                     </div>
 
                                 </div>
-                                <button class="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faTrash} /></button>
-                                <button class="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faArrowRight} /></button>
+                                <button className="btn  btn-xs col-1 inboxBtn" title="View" style={{marginLeft:5}} onClick={e=>ViewDraft(mail)}>
+                                    <FontAwesomeIcon icon={faUsersViewfinder} />
+                                </button> 
+                                {/* <button class="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faTrash} /></button>
+                                <button class="btn  btn-xs col-1 inboxBtn"><FontAwesomeIcon icon={faArrowRight} /></button> */}
                             </div>
                             <div class="row"></div> 
                         </div>

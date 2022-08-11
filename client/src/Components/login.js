@@ -32,7 +32,7 @@ const login = ()=>{
           <div className="loginBody">
               <p className="loginBodyPara1">
                 Hello User 
-                <span class="wave">👋</span>
+                <span className="wave">👋</span>
               </p>
           </div>
           <div className="googleAuth">

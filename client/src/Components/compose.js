@@ -1,8 +1,27 @@
 import React,{useState} from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../Components/navbar';
 import Loading from '../Components/loading'
 function Compose() {
+  const location = useLocation();
+  let navigate= useNavigate();
+  let locationDataTo='';
+  let locationDataSubj='';
+  let locationData='';
+
+  if(location.state!=null){
+    if(location.state.mailData.draftTo[0]!=null){
+      locationDataTo=location.state.mailData.draftTo[0].value;
+    }
+    if(location.state.mailData.draftSubject[0]!=null){
+      locationDataSubj=location.state.mailData.draftSubject[0].value;
+    }
+    if(location.state.mailData.Msnippet!=null){
+      locationData=location.state.mailData.Msnippet;
+    } 
+  }
+
   const [attach,setAttach]= useState("");
   const [mail,setMail] = useState(
     {
@@ -26,14 +45,15 @@ function Compose() {
       // })
   }
   let name,value;
+  
   const handleInput=(e)=>{
     name= e.target.name;
     value= e.target.value;
     mail.from = a.profileObj.email
     mail.accessToken= localStorage.getItem('accessToken')
     setMail({...mail,[name]:value})
-    
    // console.log({[name]:value});
+
   }
   const sendMail= async (e)=>{
     if(document.getElementsByClassName("border_red")!=null){
@@ -41,18 +61,18 @@ function Compose() {
       document.getElementById("exampleFormControlTextarea1").classList.remove("border_red");
     }
     
-    if(mail.to==""){
-    await document.getElementById("toField").classList.add("border_red");
-    window.alert("Empty credentials! Please fill the details.");
-    if(mail.message!="")
-     return;
-  }
-   if(mail.message==""){
-    await document.getElementById("exampleFormControlTextarea1").classList.add("border_red");
- if(mail.to!="")
+    if(mail.to === ""){
+      await document.getElementById("toField").classList.add("border_red");
       window.alert("Empty credentials! Please fill the details.");
-      
+      if(mail.message!=="")
       return;
+    }
+    if(mail.message ===""){
+      await document.getElementById("exampleFormControlTextarea1").classList.add("border_red");
+      if(mail.to!=="")
+        window.alert("Empty credentials! Please fill the details.");
+        
+        return;
     }
     setLoading(true)
    
@@ -102,20 +122,26 @@ function Compose() {
       <Navbar/>
     <div className="compose-box">
       <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">From:  </label>
+        <label for="exampleFormControlInput1" className="form-label">From:  </label>
         {a.profileObj.email}
       </div>
       <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label" >To:</label>
-        <input type="email" class="form-control" id='toField' name='to' value={mail.to || ''} onChange={(e)=>handleInput(e)} placeholder="Enter one or more address"/>
+        <label for="exampleFormControlInput1" className="form-label" >To:</label>
+        <input type="email" className="form-control" id='toField'  name='to'
+         value={mail.to || '' || locationDataTo} 
+         onChange={(e)=>handleInput(e)} placeholder=" "/>
       </div>
       <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Subject:</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1"  name='subject' value={mail.subject || ''} onChange={(e)=>handleInput(e)} placeholder="Subject here(Optional)"/>
+        <label for="exampleFormControlInput1" className="form-label">Subject:</label>
+        <input type="text" className="form-control" id="exampleFormControlInput1"  name='subject' 
+        value={mail.subject || '' || locationDataSubj}  
+        onChange={(e)=>handleInput(e)} placeholder=" "/>
       </div>
       <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Message:</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" name='message' value={mail.message || ''} onChange={(e)=>handleInput(e)} rows="9"></textarea>
+        <label for="exampleFormControlTextarea1" className="form-label">Message:</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" name='message' 
+        value={mail.message || '' || locationData} 
+        onChange={(e)=>handleInput(e)} rows="9"></textarea>
       </div>
       {loading? <Loading/>: <button  type="submit" class=" send btn btn-primary mb-3" onClick={sendMail}>Send</button>}
       <input type="file"  name='image' value={attach || '' } onChange={uploadFile} id="inputGroupFile01"  ></input>

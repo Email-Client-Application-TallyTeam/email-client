@@ -4,11 +4,11 @@ import axios from 'axios';
 import moment from 'moment';
 import { useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faInbox, faArrowAltCircleLeft, faTrash, faPager, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faStar,faArrowAltCircleLeft, faTrash} from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../Components/navbar';
 import LoadInbox from './LoadInbox';
 
-export const ViewMail = () => {
+const ViewMail = () => {
   const location = useLocation();
   const navigate= useNavigate();
   const [loading,setLoading] = useState(true);
@@ -28,7 +28,7 @@ export const ViewMail = () => {
       async function fetchSnippet() {
           const currentAccess=localStorage.getItem('accessToken')
           const data= await axios.post("/getSnippet",{currentAccess});
-          console.log(data.data);
+          //console.log(data.data);
 
           data.data.forEach(snip=>{
             if(snip.messageId==location.state.id){
@@ -85,3 +85,6 @@ export const ViewMail = () => {
   </div>
   )
 }
+
+
+export default ViewMail;
