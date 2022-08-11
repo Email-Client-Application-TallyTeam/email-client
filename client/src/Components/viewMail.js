@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faInbox, faArrowAltCircleLeft, faTrash, faPager, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../Components/navbar';
 import LoadInbox from './LoadInbox';
-let navigate= useNavigate();
+
 export const ViewMail = () => {
   const location = useLocation();
   const navigate= useNavigate();
@@ -19,14 +19,22 @@ export const ViewMail = () => {
     messageSubject:"",
     messageBody:"",
     messageTo:""
+  })
+  const path=()=>{
+    navigate('/')
+   }
 
-})
- const path=()=>{
-  navigate('/')
- }
   useEffect(()=>{
       async function fetchSnippet() {
           const currentAccess=localStorage.getItem('accessToken')
+          const data= await axios.post("/getSnippet",{currentAccess});
+          console.log(data.data);
+
+          data.data.forEach(snip=>{
+            if(snip.messageId==location.state.id){
+              currentMsg.messageId=snip.messageId;
+              currentMsg.snippet=snip.snippet;
+              currentMsg.messageDate=snip.messageDate[0].value;
               currentMsg.messageSubject=snip.messageSubject[0].value;
               currentMsg.messageFrom=snip.messageFrom[0].value;
               currentMsg.messageBody=snip.messageBody;
@@ -34,12 +42,11 @@ export const ViewMail = () => {
               console.log(currentMsg);
               setLoading(false);
             }
-         
+          })
           
-        
+        }
       fetchSnippet();
-    },0)
-  //},[])
+  },0)
 
   return (
     <div>
@@ -49,7 +56,7 @@ export const ViewMail = () => {
               <div>
                   <div class="mb-3">  
                     <div className='sender'>
-                      <button className="btn btn-md col-1 inboxBtn" title='Back to inbox' onClick={path}><FontAwesomeIcon icon={faArrowAltCircleLeft} /></button>
+                      <button className="btn btn-xl col-1 inboxBtn" title='Back to inbox' onClick={path}><FontAwesomeIcon icon={faArrowAltCircleLeft} /></button>
                       <div className='subject'>{(currentMsg.messageSubject)}</div>
                       <p className='Inboxdate'>{ moment(currentMsg.messageDate.value).format("YYYY-MM-DD") } </p>
                       <div className='viewIcons'>

@@ -58,6 +58,7 @@ router.post("/send", async (req, res) => {
                               console.log("Here is error"+ error);
                               
                           }else{
+                              console.log(req.body.image);
                               console.log(response);
                               res.status(200).json("success")
                           }
@@ -137,130 +138,128 @@ readGmailMessages = async () => {
 };
 
 // RECIEVING MAILS
-router.post("/getSnippet", async (req,res)=>{
-  accessToken=req.body.currentAccess;
-  console.log(accessToken)
-  const snippetsArray=[];
+// router.post("/getSnippet", async (req,res)=>{
+//   accessToken=req.body.currentAccess;
+//   console.log(accessToken)
+//   const snippetsArray=[];
   
-  const threadIdListObject = await readGmailMessages();
+//   const threadIdListObject = await readGmailMessages();
 
- console.log(threadIdListObject);
+// // console.log(threadIdListObject);
 
-  threadIdListObject.messages.forEach(async (msg)=>{
-      const message = await readGmailContent(msg.threadId);
-      // console.log(message.payload.headers);
-      //console.log(JSON.stringify(message));
-     
-      //Populating message array
-      const body=message.payload.parts[0].body.data;
-      console.log(body);
-      const arg=JSON.stringify(body);
-      const decodedStr = Buffer.from(arg, "base64").toString("utf8");
-      //console.log(decodedStr);
+//   threadIdListObject.messages.forEach(async (msg)=>{
+//       const message = await readGmailContent(msg.threadId);
+//       //console.log(JSON.stringify(message));
+//      console.log(message.payload);
+//       //Populating message array
+//       const body=message.payload.parts[0].body;
+//       const arg=JSON.stringify(body);
+//    //   const decodedStr = Buffer.from(arg, "base64").toString("utf8");
+//       //console.log(decodedStr);
       
-      //Populating snippet array
-      snippetsArray.push({
-        messageId:message.id,
-        snippet:message.snippet,
-        messageFrom:message.payload.headers.filter((data)=>data.name==="From"?data.value:null),
-        messageTo:message.payload.headers.filter((data)=>data.name==="To"?data.value:null),
-        messageDate:message.payload.headers.filter((data)=>data.name==="Date"?data.value:null),
-        messageSubject:message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null),
-        messageBody:decodedStr
-      });
+//       //Populating snippet array
+//       snippetsArray.push({
+//         messageId:message.id,
+//         snippet:message.snippet,
+//         messageFrom:message.payload.headers.filter((data)=>data.name==="From"?data.value:null),
+//         messageTo:message.payload.headers.filter((data)=>data.name==="To"?data.value:null),
+//         messageDate:message.payload.headers.filter((data)=>data.name==="Date"?data.value:null),
+//         messageSubject:message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null),
+//       //  messageBody:decodedStr
+//       });
       
       
 
-      if(snippetsArray.length == 50){
-        console.log("passed");
-        snippetsArray.sort(function(a,b){
-          return new Date(b.messageDate[0].value) - new Date(a.messageDate[0].value);
-        });
+//       if(snippetsArray.length == 1){
+//         console.log("passed");
+//         snippetsArray.sort(function(a,b){
+//           return new Date(b.messageDate[0].value) - new Date(a.messageDate[0].value);
+//         });
         
-        res.json(snippetsArray);
-      }
+//         res.json(snippetsArray);
+//       }
 
-  })
-})
-
-
+//   })
+// })
 
 
-// RECIEVING DRAFTS
-readDraftContent = async (messageId) => {
-  var config = {
-    method: "get",
-    url: `https://gmail.googleapis.com/gmail/v1/users/me/drafts/${messageId}`,
-    headers: {
-      Authorization: `Bearer ${await accessToken}`,
-    },
-  };
 
-  var data = {};
 
-  await axios(config)
-    .then(async function (response) {
-      data = await response.data;
-      //console.log(data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+// // RECIEVING DRAFTS
+// readDraftContent = async (messageId) => {
+//   var config = {
+//     method: "get",
+//     url: `https://gmail.googleapis.com/gmail/v1/users/me/drafts/${messageId}`,
+//     headers: {
+//       Authorization: `Bearer ${await accessToken}`,
+//     },
+//   };
 
-  return data;
-};
+//   var data = {};
 
-readGmailDrafts = async () => {
-  var config = {
-    method: "get",
-    url: `https://gmail.googleapis.com/gmail/v1/users/me/drafts`,
-    headers: {
-      Authorization: `Bearer ${await accessToken}`,
-    },
-  };
+//   await axios(config)
+//     .then(async function (response) {
+//       data = await response.data;
+//       //console.log(data);
+//     })
+//     .catch(function (error) {
+//       console.log(error);
+//     });
 
-  var data = {};
+//   return data;
+// };
 
-  await axios(config)
-    .then(async function (response) {
-      data = await response.data;
-      //console.log(data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+// readGmailDrafts = async () => {
+//   var config = {
+//     method: "get",
+//     url: `https://gmail.googleapis.com/gmail/v1/users/me/drafts`,
+//     headers: {
+//       Authorization: `Bearer ${await accessToken}`,
+//     },
+//   };
 
-  return data;
-};
+//   var data = {};
 
-router.post("/getDraft", async (req,res)=>{
-  accessToken=req.body.currentAccess;
+//   await axios(config)
+//     .then(async function (response) {
+//       data = await response.data;
+//       //console.log(data);
+//     })
+//     .catch(function (error) {
+//       console.log(error);
+//     });
 
-  const DraftsnippetsArray=[];
-  const draftArray=[];
-  const DraftIdListObject = await readGmailDrafts();
-  //console.log(DraftIdListObject, "Threads");
+//   return data;
+// };
 
-  DraftIdListObject.drafts.forEach(async (msg)=>{
-      const draft = await readDraftContent(msg.id);
-      //console.log(draft.message.payload.headers)
-      //Populating snippet array
-      DraftsnippetsArray.push({
-        draftId:draft.id,
-        Msnippet:draft.message.snippet,
-        draftFrom:draft.message.payload.headers.filter((data)=>data.name==="From"?data.value:null),
-        draftTo:draft.message.payload.headers.filter((data)=>data.name==="To"?data.value:null),
-        draftDate:draft.message.payload.headers.filter((data)=>data.name==="Date"?data.value:null),
-        draftSubject:draft.message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null)
+// router.post("/getDraft", async (req,res)=>{
+//   accessToken=req.body.currentAccess;
+
+//   const DraftsnippetsArray=[];
+//   const draftArray=[];
+//   const DraftIdListObject = await readGmailDrafts();
+//   //console.log(DraftIdListObject, "Threads");
+
+//   DraftIdListObject.drafts.forEach(async (msg)=>{
+//       const draft = await readDraftContent(msg.id);
+//       //console.log(draft.message.payload.headers)
+//       //Populating snippet array
+//       DraftsnippetsArray.push({
+//         draftId:draft.id,
+//         Msnippet:draft.message.snippet,
+//         draftFrom:draft.message.payload.headers.filter((data)=>data.name==="From"?data.value:null),
+//         draftTo:draft.message.payload.headers.filter((data)=>data.name==="To"?data.value:null),
+//         draftDate:draft.message.payload.headers.filter((data)=>data.name==="Date"?data.value:null),
+//         draftSubject:draft.message.payload.headers.filter((data)=>data.name==="Subject"?data.value:null)
         
-      });
+//       });
      
-      if(DraftsnippetsArray.length == 10){
-        console.log("passed");
-        res.json(DraftsnippetsArray);
-      }
-  })
-})
+//       if(DraftsnippetsArray.length == 10){
+//         console.log("passed");
+//         res.json(DraftsnippetsArray);
+//       }
+//   })
+// })
 
 
     

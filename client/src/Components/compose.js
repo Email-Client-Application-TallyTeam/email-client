@@ -69,7 +69,7 @@ function Compose() {
     }).catch(function (error) {
       console.log("no  attach",error);
     });
-    
+  try{
   const data=await axios.post("/send",mail)
    console.log(data.status);
   if(data.status==200){
@@ -85,7 +85,17 @@ function Compose() {
       setMail({["to"]:"",["subject"]:"",["message"]:"",["image"]:""});
      console.log(data);
    
-      //axios.post()
+     }
+     catch(err){
+     window.alert("Server not responding")
+     setMail({["to"]:"",["subject"]:"",["message"]:"",["image"]:""});
+     setLoading(false);
+
+}
+
+     
+      
+       //axios.post()
   }
   return (
     <div className="composeCont">
