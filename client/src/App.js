@@ -8,6 +8,7 @@ import Sent from './Components/sent'
 import Stared from './Components/stared'
 import Draft from './Components/draft'
 import Trash from './Components/trash'
+import { Viewdemo } from './Components/viewdemo';
 import Compose from './Components/compose'
 import ViewMail from './Components/viewMail';
 import './App.css';
@@ -37,6 +38,7 @@ const Routing = () =>{
       <Route path="/trash" element={<Trash />} />
       <Route path="/compose" element={<Compose/>}/>
       <Route path="/view" element={<ViewMail/>}/>
+      <Route path="/demo"  element={<Viewdemo/>}/>
     </Routes>
   )
 }

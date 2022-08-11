@@ -33,8 +33,8 @@ const inbox = () => {
                                         <h5>{mail.sender} </h5>
                                         <div class="text-warning">{mail.date}</div>
                                     </div>
-                                    <button class="btn  btn-sm col-1  buttom-customise"><FontAwesomeIcon icon={faTrashCan} /></button>
-                                    <button class="btn  btn-sm col-1  buttom-customise"><FontAwesomeIcon icon={faTrashRestore} /></button>
+                                    <button class="btn  btn-sm col-1  buttom-customise" title='Delete permanently'><FontAwesomeIcon icon={faTrashCan} /></button>
+                                    <button class="btn  btn-sm col-1  buttom-customise" title='Recycle this mail'><FontAwesomeIcon icon={faTrashRestore} /></button>
                                 </div>  
                                 <div class="row">{mail.body}</div> 
                                

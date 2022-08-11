@@ -46,7 +46,7 @@ router.post("/send", async (req, res) => {
                           subject: req.body.subject ,
                           attachments: [
                             {
-                            //f path: path
+                              path: req.body.image
                             }
                          ],
                           html: `<h4> ${req.body.message} </h4>`

@@ -10,7 +10,8 @@ function Navbar() {
             <nav id="sidebarMenu" className=" d-lg-block sidebar collapse.show bg-white">
               <div className="position-sticky">
                 <Link to="/compose" className=" py-4 ripple btn-lg" aria-current="true">
-                  <button type="button" className="btn btn-outline-dark my-4 mx-8 ms-4  mt-5"> 
+                  <button type="button" className="btn btn-outline-dark my-4 mx-8 ms-4  mt-5"  title="Compose mail"> 
+                  
                     <FontAwesomeIcon icon={faPlus} /> 
                     Compose Mail
                   </button>

@@ -132,6 +132,7 @@ const inbox = () => {
                     onClick={() => {
                     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
                     }}
+                    title='move to top'
                     style={{
                     position: 'fixed',
                     padding: '1rem 2rem',

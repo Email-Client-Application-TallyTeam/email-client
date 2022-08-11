@@ -56,7 +56,7 @@ const ViewMail = () => {
               <div>
                   <div class="mb-3">  
                     <div className='sender'>
-                      <button className="btn btn-md col-1 inboxBtn" title='Back to inbox' onClick={path}><FontAwesomeIcon icon={faArrowAltCircleLeft} /></button>
+                      <button className="btn btn-xl col-1 inboxBtn" title='Back to inbox' onClick={path}><FontAwesomeIcon icon={faArrowAltCircleLeft} /></button>
                       <div className='subject'>{(currentMsg.messageSubject)}</div>
                       <p className='Inboxdate'>{ moment(currentMsg.messageDate.value).format("YYYY-MM-DD") } </p>
                       <div className='viewIcons'>
